@@ -3,6 +3,7 @@ import { Card, Button } from 'antd';
 import { MessageOutlined } from '@ant-design/icons';
 
 const PublishedTask = ({ task, isTaken, takerInfo }) => {
+
     const renderTaskDetails = () => {
         return (
             <Card title={task.name} style={{ marginBottom: 16 }}>
