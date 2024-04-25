@@ -6,11 +6,9 @@ const { TabPane } = Tabs;
 
 const TaskProgress = () => {
     const tasks = [
-        // 示例数据
-        { id: 1, status: 'new', title: '新订单1', /* ...其他任务详情... */ },
-        { id: 2, status: 'in_progress', title: '进行中订单1', /* ...其他任务详情... */ },
-        { id: 3, status: 'completed', title: '已结束订单1', /* ...其他任务详情... */ },
-        // ...更多任务
+        { id: 1, status: 'new', title: '新订单1', },
+        { id: 2, status: 'in_progress', title: '进行中订单1', },
+        { id: 3, status: 'completed', title: '已结束订单1', }/* ...其他任务详情... */
     ];
 
     const filteredTasks = (status) => {
@@ -18,7 +16,6 @@ const TaskProgress = () => {
     };
 
     const handleTaskAction = (task) => {
-        // 根据任务状态执行不同的操作，如接受订单、任务分配、任务交付等
         console.log(`处理任务: ${task.title}`);
     };
 
