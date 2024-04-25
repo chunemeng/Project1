@@ -1,29 +1,21 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import java.sql.Timestamp;
-import java.time.Instant;
-
+// 用户实体类
+// 为抽象类
 @Data
 @Entity
-public class User {
+public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String nickname;
-    private String username;
-    private String password;
-    private String email;
-    private boolean status;
-    @Column(name = "worker_id", columnDefinition = "int UNSIGNED")
-    private Long workId;
-
-    @Column(name = "create_date", nullable = false)
-    private Timestamp createDate;
-
-    @Column(name = "update_date", nullable = false)
-    private Timestamp updateDate;
-
+    private int ID;
+    private String name;
 }
