@@ -1,10 +1,10 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.sql.Timestamp;
+import java.time.Instant;
 
 @Data
 @Entity
@@ -17,4 +17,13 @@ public class User {
     private String password;
     private String email;
     private boolean status;
+    @Column(name = "worker_id", columnDefinition = "int UNSIGNED")
+    private Long workId;
+
+    @Column(name = "create_date", nullable = false)
+    private Timestamp createDate;
+
+    @Column(name = "update_date", nullable = false)
+    private Timestamp updateDate;
+
 }
