@@ -1,12 +1,11 @@
 package com.example.demo.controller;
 
-import com.example.demo.dto.LoginDTO;
+import com.example.demo.dto.LoginDto;
 import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,7 @@ public class UserController {
     UserService userService;
 
     @PostMapping("/login")
-    Result login(@RequestBody LoginDTO loginDTO, HttpServletResponse httpServletResponse) {
+    Result login(@RequestBody LoginDto loginDTO, HttpServletResponse httpServletResponse) {
         if (loginDTO == null) {
             return Result.error("网络错误");
         }
@@ -27,7 +26,7 @@ public class UserController {
     }
 
     @PostMapping("/me")
-    Result getMe(@RequestBody LoginDTO loginDTO, HttpServletRequest httpServletRequest) {
+    Result getMe(@RequestBody LoginDto loginDTO, HttpServletRequest httpServletRequest) {
         if (loginDTO == null) {
             return Result.error("网络错误");
         }
