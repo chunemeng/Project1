@@ -5,11 +5,11 @@ import {useNavigate} from "react-router-dom";
 const { Header, Content, Sider } = Layout;
 
 const PrivateLayout = ({children}) => {
-    const navigate = useNavigate();
+    /*const navigate = useNavigate();*/
 
     const handleMenuClick = (e) => {
         const str = "/" + e.key;
-        navigate(str);
+        /*navigate(str);*/
     };
     return (
         <Layout style={{height:'100%'}}>
