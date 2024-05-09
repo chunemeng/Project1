@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { Modal, Input, Button, List } from 'antd';
 
-const ChatBox = ({ visible, onCancel, onSendMessage }) => {
+const ChatBox = ({ visible, onCancel }) => {
     const [message, setMessage] = useState('');
-
+    const data = [
+        'Racing car sprays burning fuel into crowd.',
+        'Japanese princess to wed commoner.',
+        'Australian walks 100km after outback crash.',
+        'Man charged over missing wedding girl.',
+        'Los Angeles battles huge wildfires.',
+    ];
+    const [messages, setMessages] = useState(data);
     const handleInputChange = (e) => {
         setMessage(e.target.value);
     };
+
+    const onSendMessage = (message) => {
+        setMessages([...messages, message]);
+    }
 
     const handleSendMessage = () => {
         onSendMessage(message); // 发送消息到聊天逻辑处理函数
@@ -21,13 +32,12 @@ const ChatBox = ({ visible, onCancel, onSendMessage }) => {
             footer={null}
         >
             <List
+                style={{height:"300px",overflowY:"scroll"}}
                 itemLayout="horizontal"
-
+                dataSource={messages}
                 renderItem={(item) => (
                     <List.Item>
-                        <List.Item.Meta
-                            title={item.content}
-                        />
+                        {item}
                     </List.Item>
                 )}
             />
@@ -63,7 +73,7 @@ const ChatTriggerButton = () => {
     };
 
     return (
-        <div>
+        <div style={{}}>
             <Button onClick={showChatBox}>打开聊天框</Button>
             <ChatBox
                 visible={visible}
