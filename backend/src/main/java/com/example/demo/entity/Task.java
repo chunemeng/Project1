@@ -3,56 +3,37 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+
 @Data
 @Entity
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private String name;
-    private String taskInfo;
+    private Long id;
 
-    // 与公会形成多对一映射关系
-    @ManyToOne
-    @JoinColumn(name = "union_id")
-    private Union union;
+    private String title;
 
-    // 与众包者形成多对一映射关系
-    @ManyToOne
-    @JoinColumn(name = "worker_id")
-    private Worker worker;
+    private Long userId;
 
-    // 与招募者也形成多对一映射关系
-    @ManyToOne
-    @JoinColumn(name = "recruiter_id")
-    private Recruiter recruiter;
+    private Long workerId;
 
-    public Task(String taskInfo,Union union,
-                Recruiter recruiter,String name){
-        this.name = name;
-        this.taskInfo = taskInfo;
-        this.union = union;
-        this.worker = null;
-        this.recruiter = recruiter;
-    }
+    private Long recruiterId;
 
-    public Task(){
+    private Short category;
 
-    }
+    private Boolean status;
 
-    public Task(String taskInfo,Worker worker,
-                Recruiter recruiter,String name){
-        this.name = name;
-        this.taskInfo = taskInfo;
-        this.union = null;
-        this.worker = worker;
-        this.recruiter = recruiter;
-    }
+    @Column(name = "description")
+    private String description;
 
-    public Task(String taskInfo, Recruiter recruiter,
-                String name){
-        this.taskInfo = taskInfo;
-        this.name = name;
-        this.recruiter = recruiter;
-    }
+    @Column(name = "create_date", nullable = false)
+    private Timestamp createDate;
+
+    @Column(name = "update_date", nullable = false)
+    private Timestamp updateDate;
+
+    @Column(name = "duration", nullable = false)
+    private Timestamp duration;
 }
