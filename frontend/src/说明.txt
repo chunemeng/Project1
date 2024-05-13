@@ -1,0 +1,11 @@
+新添加的文件是
+component:
+chat.jsx ：实现聊天框弹出
+courses.jsx：社区页面中的课程条组件
+GuildInfo.jsx：工会详情页，暂无具体信息
+layout_1.jsx：封装侧边栏和content，目前仍存在bug，将其他组件传入content中，无法显示组件
+router_1.jsx：导航
+MemberList.jsx：成员列表
+TaskProgress.jsx：展示任务组件
+page目录下：
+communnity.jsx：社区页面组件，目前只能显示课程条，无法点击进入课程
