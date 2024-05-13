@@ -1,5 +1,4 @@
 import React from 'react';
-import PrivateLayout from "./layout_1";
 import { List, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import Member from './Member';

@@ -11,6 +11,7 @@ export default function NavBar() {
     const navItems = [
         {label: "首页", value: "/"},
         {label: "众包者", value: "/worker"},
+        {label: "公会", value: "/union"},
         {label: "需求发布", value: "/publish"},
         {label:"我的任务", value: "/mytask"}
     ];
@@ -61,17 +62,17 @@ export default function NavBar() {
                        style={{height: "40px", width: "40px"}}></Image>
                 <Link to="/" style={{fontSize: 25}}>众智</Link>
             </Space>
-            <Row className="navbar"
+            <Space className="navbar"
                  style={{display: "flex", justifyContent: "center", alignItems: "center", marginLeft: "auto",paddingRight:"80px"}}>
                 <Menu mode="horizontal"
                       items={navMenuItems}
                       onClick={handleMenuClick}
-                      style={{fontsize: 18,marginRight: "80px"}}
+                      style={{fontsize: 18,marginRight: "120px"}}
                 />
                 <Dropdown menu={{onClick: handleMenuClick, items: items}}>
                     <Button shape="circle" icon={<UserOutlined/>}/>
                 </Dropdown>
-            </Row>
+            </Space>
         </Row>
     );
 }

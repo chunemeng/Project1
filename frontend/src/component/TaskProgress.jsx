@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tabs,Divider } from 'antd';
-import PrivateLayout from "./layout_1";
+import {BasicLayout} from "./layout";
 
 const { TabPane } = Tabs;
 
@@ -62,9 +62,9 @@ const TaskProgress = () => {
 
 const TaskProgressPage = () => {
     return (
-        <PrivateLayout>
+        <BasicLayout>
             {TaskProgress}
-        </PrivateLayout>
+        </BasicLayout>
     )
 }
 
