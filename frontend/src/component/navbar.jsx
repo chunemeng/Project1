@@ -10,8 +10,8 @@ export default function NavBar() {
     const navigate = useNavigate();
     const navItems = [
         {label: "首页", value: "/"},
-        {label: "众包者", value: "/worker"},
-        {label: "公会", value: "/union"},
+        {label: "众包", value: "/worker"},
+        {label: "公会", value: "/union/1"},
         {label: "需求发布", value: "/publish"},
         {label:"我的任务", value: "/mytask"}
     ];
@@ -58,7 +58,7 @@ export default function NavBar() {
         <Row className={"flex-raw"} >
             {contextHolder}
             <Space size="large" style={{marginLeft: "80px"}}>
-                <Image src={process.env.PUBLIC_URL + 'logo.png'} preview={false}
+                <Image src={'/logo.png'} preview={false}
                        style={{height: "40px", width: "40px"}}></Image>
                 <Link to="/" style={{fontSize: 25}}>众智</Link>
             </Space>

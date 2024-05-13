@@ -10,7 +10,6 @@ import MyTaskPage from "../page/mytask";
 import Publish from "../page/publish";
 import UnionInfoPage from "../page/union_info";
 import MemberListPage from "./MemberList";
-import TaskProgressPage from "./TaskProgress";
 import React from "react";
 import Community from "../page/community";
 
@@ -46,15 +45,12 @@ export default function Router() {
             path: 'mytask',
             element: <MyTaskPage/>
         }, {
-            path: 'union',
+            path: 'union/:id',
             element: <UnionInfoPage/>
         }, {
             path: 'memberList',
             element: <MemberListPage/>
-        }, {
-            path: 'taskProgress',
-            element: <TaskProgressPage/>
-        }, {
+        },{
             path: 'community',
             element: <Community/>
         }]
@@ -62,6 +58,9 @@ export default function Router() {
         <Routes><Route path={'/'}
                        element={<HomePage/>}>
         </Route>
+            <Route path={'/*'}
+                   element={<HomePage/>}>
+            </Route>
             {router.map(route => <Route path={`/${route.path}`} element={route.element}/>)}
         </Routes>
     </BrowserRouter>
