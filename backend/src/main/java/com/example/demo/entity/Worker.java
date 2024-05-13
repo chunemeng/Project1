@@ -17,12 +17,14 @@ public class Worker{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     private String name;
     private String description;
 
     private Boolean status;
+
+    private Long unionId;
 
     @Column(name = "user_id", columnDefinition = "int UNSIGNED not null")
     private Long userId;

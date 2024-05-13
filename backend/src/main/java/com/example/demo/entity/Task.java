@@ -21,6 +21,8 @@ public class Task {
 
     private Long recruiterId;
 
+    private Long unionId;
+
     private Short category;
 
     private Boolean status;

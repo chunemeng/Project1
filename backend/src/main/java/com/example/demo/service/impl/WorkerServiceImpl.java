@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.dao.WorkerRepository;
 import com.example.demo.dto.QueryDto;
 import com.example.demo.dto.TaskDto;
+import com.example.demo.dto.WorkerDto;
 import com.example.demo.entity.Task;
 import com.example.demo.entity.Worker;
 import com.example.demo.result.PageResult;
@@ -24,7 +25,26 @@ public class WorkerServiceImpl implements WorkerService {
     WorkerRepository workerRepository;
 
     @Override
-    public PageResult getWorkes(QueryDto queryDto) {
-        return null;
+    public PageResult getWorkers(QueryDto queryDto) {
+        Page<Worker> page;
+        if(queryDto.getStatus() == null) {
+            throw new RuntimeException("网络错误，众包者状态不能为空");
+        }
+        if(queryDto.getKeyword().isEmpty()) {
+            page = workerRepository.findAllByStatus(queryDto.getStatus(),PageRequest.of(queryDto.getPageIndex(), queryDto.getPageSize()));
+        } else {
+            Worker worker = new Worker();
+            worker.setStatus(queryDto.getStatus());
+
+            ExampleMatcher matching = ExampleMatcher.matching();
+            matching = matching.withMatcher("title", ExampleMatcher.GenericPropertyMatchers.contains());
+
+            Example<Worker> example = Example.of(worker, matching);
+            page = workerRepository.findAll(example, PageRequest.of(queryDto.getPageIndex(), queryDto.getPageSize()));
+        }
+        List<WorkerDto> workerDtoList = new ArrayList<>();
+        BeanUtils.copyProperties(page.getContent(), workerDtoList);
+        return new PageResult(page.getTotalPages(), workerDtoList);
+
     }
 }
