@@ -11,11 +11,11 @@ import com.example.demo.utils.JWTUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -23,9 +23,27 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
+    private static final String slat = "THIS-IS-THIS-IS-THIS-IS-THIS";
+
+    private static final String JWT_TOKEN_HEADER = "jwt-token";
+
+
     @Override
     public Result logout(HttpServletRequest httpServletRequest) {
-        // todo jwt无法主动失效，需使用redis存储有效jwt，退出登录时退役jwt
+        String token = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
+        if (token == null) {
+            return Result.error("未提供JWT令牌");
+        }
+        DecodedJWT verify = JWTUtils.verify(token);
+        if (verify == null) {
+            return Result.error("JWT令牌验证失败");
+        }
+        Long id = Long.valueOf(verify.getId());
+
+        redisTemplate.delete("Authentication" + id);
         return Result.success("登出成功", null);
     }
 
@@ -40,9 +58,12 @@ public class UserServiceImpl implements UserService {
         if (user.isPresent()) {
             if (user.get().getPassword().equals(password)) {
                 Map<String, String> map = new HashMap<>();
-                map.put("id", String.valueOf(user.get().getId()));
-                String s = JWTUtils.createToken(map);
-                httpServletResponse.setHeader("token", JWTUtils.createToken(map));
+                Long userId = user.get().getId();
+                map.put("id", String.valueOf(userId));
+                map.put("date", String.valueOf(System.currentTimeMillis()));
+                final String token = JWTUtils.createToken(map);
+                redisTemplate.opsForValue().set("Authentication" + userId, token, JWTUtils.getExpireTime(), TimeUnit.SECONDS);
+                httpServletResponse.setHeader(JWT_TOKEN_HEADER, token);
                 return Result.success("登陆成功", null);
             }
         }
@@ -51,7 +72,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getMe(HttpServletRequest httpServletRequest) {
-        String token = httpServletRequest.getHeader("token");
+        String token = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
         DecodedJWT verify = JWTUtils.verify(token);
         Long id = Long.valueOf(verify.getId());
         Optional<User> user = userRepository.findById(id);
@@ -69,6 +90,7 @@ public class UserServiceImpl implements UserService {
         if (user.isPresent()) {
             return Result.error("用户名已被占用");
         }
+
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(password);
@@ -77,12 +99,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result changePassword(LoginDto loginDTO) {
+    public Result changePassword(LoginDto loginDTO, HttpServletResponse httpServletResponse) {
         Optional<User> user = userRepository.findByUsername(loginDTO.getUsername());
         if (user.isEmpty()) {
             return Result.error("用户不存在");
         } else if (user.get().getPassword().equals(loginDTO.getPassword())) {
             user.get().setPassword(loginDTO.getPassword());
+            Long userId = user.get().getId();
+            Map<String, String> map = new HashMap<>();
+            map.put("id", String.valueOf(userId));
+            map.put("date", String.valueOf(System.currentTimeMillis()));
+            final String token = JWTUtils.createToken(map);
+            redisTemplate.opsForValue().set("Authentication" + userId, token, JWTUtils.getExpireTime(), TimeUnit.SECONDS);
+            httpServletResponse.setHeader(JWT_TOKEN_HEADER, token);
             userRepository.save(user.get());
             return Result.success("修改成功", null);
         } else {

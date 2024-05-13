@@ -1,7 +1,9 @@
 package com.example.demo.config;
 
 import com.example.demo.interceptor.JWTInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -11,6 +13,9 @@ import java.util.List;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
+    @Autowired
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         JWTInterceptor jwtInterceptor = new JWTInterceptor();

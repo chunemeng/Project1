@@ -16,5 +16,5 @@ public interface UserService {
 
     Result register(LoginDto loginDTO);
 
-    Result changePassword(LoginDto loginDTO);
+    Result changePassword(LoginDto loginDTO, HttpServletResponse httpServletResponse);
 }
