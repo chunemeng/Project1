@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Button } from 'antd';
 import { MessageOutlined } from '@ant-design/icons';
 
-const PublishedTask = ({ task, isTaken, takerInfo }) => {
+const Publishedtask = ({ task, isTaken, takerInfo }) => {
 
     const renderTaskDetails = () => {
         return (
@@ -36,5 +36,5 @@ const PublishedTask = ({ task, isTaken, takerInfo }) => {
     );
 };
 
-export default PublishedTask;
+export default Publishedtask;
 //我发布的任务：包括任务信息，酬金，是否有人接单，以及接单者信息

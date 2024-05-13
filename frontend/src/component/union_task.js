@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import Task from './Task';
+import Task from './task';
 import Progress from './Progress';
 
 const UnionTask = ({ task, isUnionManager,steps }) => {
@@ -40,4 +40,3 @@ const UnionTask = ({ task, isUnionManager,steps }) => {
 };
 
 export default UnionTask;
-//工会任务组件：包括任务详情，酬金和身份以及分配任务按钮

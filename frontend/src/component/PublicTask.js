@@ -1,5 +1,5 @@
 import React from 'react';
-import UnionTask from './UnionTask';
+import Union_task from './union_task';
 import TaskProgress from "./TaskProgress"; // 引入新的UnionTask组件
 
 const PublicTask = ({ tasks, currentTaskIndex, isUnionManager,steps }) => {
@@ -7,7 +7,7 @@ const PublicTask = ({ tasks, currentTaskIndex, isUnionManager,steps }) => {
         <div>
             <h2>工会任务列表</h2>
             {tasks.map((task, index) => (
-                <UnionTask
+                <Union_task
                     key={index}
                     task={task}
                     isUnionManager={task.isUnionManager} // 传递用户角色到UnionTask组件

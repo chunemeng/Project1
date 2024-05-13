@@ -38,23 +38,3 @@ export function SiderLayout({children, menus}) {
         </Footer>
     </Layout>
 }
-
-//     return (
-//         <Layout>
-//             <Header style={{background: "white"}}><NavBar/></Header>
-//             <Layout>
-//                 <Sider style={{backgroundColor: 'rgba(0,0,0,0%)',marginTop:"20px",marginLeft:"140px"}} width="10%" height="1000px">
-//                     <Card style={{height:"98%",justifyContent:"space-between"}}>
-//                         {menus}
-//                     </Card>
-//                 </Sider>
-//                 <Layout>
-//                     <Content className="content" style={{marginLeft:"0"}} height="1000px">
-//                         {children}
-//                     </Content>
-//                 </Layout>
-//             </Layout>
-//             <Footer style={{display: "flex", justifyContent: "center"}}><About/></Footer>
-//         </Layout>
-//     );
-// }
