@@ -9,5 +9,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface WorkerRepository extends JpaRepository<Worker, Long> {
-    Page<Worker> findAllByStatus(Integer status, Pageable pageable);
+    Page<Worker> findAllByStatus(Boolean status, Pageable pageable);
 }

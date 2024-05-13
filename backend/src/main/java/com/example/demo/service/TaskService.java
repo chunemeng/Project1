@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.dto.IdDto;
 import com.example.demo.dto.QueryDto;
 import com.example.demo.dto.TaskDto;
 import com.example.demo.result.PageResult;
@@ -14,4 +15,10 @@ public interface TaskService {
 
     public Result addTask(TaskDto taskDto);
     public PageResult getTasks(QueryDto queryDto);
+
+    public PageResult getTasksByWorkerId(IdDto idDto);
+
+    PageResult getTasksByUnionId(IdDto idDto);
+
+    PageResult getTasksByRecruiterId(IdDto idDto);
 }

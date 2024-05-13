@@ -1,26 +1,19 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.LoginDto;
+import com.example.demo.dto.UserDto;
 import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
-import com.example.demo.utils.JWTUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
+    UserService userService;
 
     @PostMapping("/login")
     Result login(@RequestBody LoginDto loginDTO, HttpServletResponse httpServletResponse) {
@@ -35,9 +28,37 @@ public class UserController {
         if (loginDTO == null) {
             return Result.error("网络错误");
         }
-        String h = httpServletRequest.getHeader("USER_LOGIN_TOKEN");
 
-        return null;
+        String h = httpServletRequest.getHeader("USER_LOGIN_TOKEN");
+        if(h == null){
+            return Result.error("未提供登录令牌");
+        }
+
+        UserDto userDto = userService.getMe(httpServletRequest);
+        if(userDto != null){
+            return Result.success(userDto);
+        }
+        return Result.error("用户不存在");
     }
 
+    @PostMapping("/register")
+    Result register(@RequestBody LoginDto loginDto) {
+        if(loginDto == null){
+            return Result.error("网络错误");
+        }
+        return userService.register(loginDto);
+    }
+
+    @PutMapping("/password")
+    Result changePassword(@RequestBody LoginDto loginDto) {
+        if(loginDto == null){
+            return Result.error("网络错误");
+        }
+        return userService.changePassword(loginDto);
+    }
+
+    @PostMapping("/logout")
+    Result logout(HttpServletRequest httpServletRequest) {
+        return userService.logout(httpServletRequest);
+    }
 }

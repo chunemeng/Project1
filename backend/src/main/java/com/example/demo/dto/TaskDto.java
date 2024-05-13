@@ -16,6 +16,7 @@ public class TaskDto implements Serializable {
     Long userId;
     Long workerId;
     Long recruiterId;
+    Long unionId;
     Short category;
     Boolean status;
     String description;
@@ -29,6 +30,7 @@ public class TaskDto implements Serializable {
         this.userId = task.getUserId();
         this.workerId = task.getWorkerId();
         this.recruiterId = task.getRecruiterId();
+        this.unionId = task.getUnionId();
         this.category = task.getCategory();
         this.status = task.getStatus();
         this.description = task.getDescription();
