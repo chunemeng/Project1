@@ -34,18 +34,18 @@
 }
 
 .union-carousel {
-    /*display: flex;*/
+    display: flex;
     /*width: 60%;*/
-    height: 650px;
-    width: 650px;
+    height: 450px;
+    width: 720px;
     position: absolute;
-    left: 100px;
+    left: 40px;
 }
 
 .slick-dots li button {
     width: 10px !important ;
     height: 10px !important;
-    background: rgb(163, 38, 217) !important;
+    background: #595959 !important;
     border-radius: 100% !important;
 }
 .slick-dots li {
@@ -56,6 +56,24 @@
 }
 .ant-carousel .slick-dots-bottom{
     /*bottom: -12% !important;*/
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-prev:hover,
+.ant-carousel .slick-prev:focus {
+    font-size: inherit;
+    left: 10px;
+    z-index: 2;
+    color: blueviolet;
+}
+
+.ant-carousel .slick-next,
+.ant-carousel .slick-next:hover,
+.ant-carousel .slick-next:focus {
+    font-size: inherit;
+    right: 10px;
+    z-index: 2;
+    color: blueviolet;
 }
 
 ul {

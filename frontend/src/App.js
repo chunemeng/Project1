@@ -6,19 +6,14 @@ export default function App() {
         <ConfigProvider
             theme={{
                 components: {
-                    // Button: {
-                    //     colorPrimary: '#00b96b',
-                    //     algorithm: true, // 启用算法
-                    // },
-                    // Input: {
-                    //     colorPrimary: '#eb2f96',
-                    //     algorithm: true, // 启用算法
-                    // },
+
                     Carousel: {
-                        sizePopupArrow: 100,
+
+                        arrowOffset: 0,
                         algorithm: true, // 启用算法
                     }
                 },
+
             }}
         >
         </ConfigProvider>

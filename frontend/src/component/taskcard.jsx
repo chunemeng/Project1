@@ -9,10 +9,10 @@ export default function TaskCard({task}) {
     const navigate = useNavigate();
     return <Card onClick={() => {
         navigate("/view")
-    }} size={"small"} className={"item-card"}>
+    }} hoverable={true} size={"small"} className={"item-card"}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-        <Image src={process.env.PUBLIC_URL + `task${task.id}.png`}
-               style={{width: "100%", height: "200px", margin: "0 10px"}}/>
+            <Image src={process.env.PUBLIC_URL + `task${task.id}.png`}
+                   style={{width: "100%", height: "200px", margin: "0 10px"}}/>
         </div>
         <Col style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
             <h3>{'测试' + task.id}</h3>

@@ -1,118 +1,84 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useState} from "react"
-import {Card, Divider, Typography, Layout, Avatar, Image, Breadcrumb, Col} from 'antd'
-import {HomeOutlined, LeftOutlined, RightOutlined, UserOutlined} from '@ant-design/icons';
+import {Card, Col, Row, Space, Button, Typography, Breadcrumb, Image, Avatar} from 'antd'
+import {ExclamationCircleOutlined, HomeOutlined, UserOutlined} from '@ant-design/icons';
 import {BasicLayout} from "../component/layout";
 import {Carousel} from 'antd';
 import {useParams, useSearchParams} from "react-router-dom";
+import {getWorkerById} from "../service/worker";
+import Title from "antd/lib/typography/Title";
+import Paragraph from "antd/lib/typography/Paragraph";
 
 const imgStyle = {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
+    width: "100%", height: "100%", objectFit: "cover",
 };
-export default function UnionInfoPage({Union}) {
+export default function UnionInfoPage() {
     const [union, setUnion] = useState(null);
-    const [comments, setComments] = useState(null);
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [comments, setComments] = useState(null);
+    // const [searchParams, setSearchParams] = useSearchParams();
 
-    let { id } = useParams();
-
+    let {id} = useParams();
     const getUnion = async () => {
-        let union = await getUnionById(id);
-        setBook(book);
-    }
-
-    const getComments = async () => {
-        let comments = await getBookComments(id, pageIndex, pageSize, sort);
-        setComments(comments);
+        let union = await getWorkerById(id);
+        setUnion(union);
     }
 
     useEffect(() => {
-        getBook();
-        getComments();
+        getUnion();
     }, [id]);
 
-    useEffect(() => {
-        getComments();
-    }, [pageIndex, pageSize, sort])
-
-    const handleMutate = () => {
-        getComments();
-    };
-
-    const handlePageChange = (page) => {
-        setSearchParams({
-            pageIndex: page - 1,
-            pageSize,
-            sort
-        });
-    };
-
-    const handleSortChange = (sort) => {
-        setSearchParams({
-            pageIndex: 0,
-            pageSize,
-            sort
-        });
-    };
-
-    return <PrivateLayout>
-        {book && comments && <BookInfoCard
-            pageIndex={pageIndex}
-            sort={sort}
-            book={book}
-            comments={comments}
-            onMutate={handleMutate}
-            onPageChange={handlePageChange}
-            onSortChange={handleSortChange}
-        />}
-
+    console.log(union);
 
     return (<BasicLayout>
         <Card style={{height: "1000px"}}>
+            <Breadcrumb
+                items={[{
+                    href: '', title: <HomeOutlined/>,
+                }, {
+                    href: '', title: (<>
+                        <UserOutlined/>
+                        <span>Application List</span>
+                    </>),
+                }, {
+                    title: 'Application',
+                },]}
+            />
             <Col>
-                <Breadcrumb
-                    items={[
-                        {
-                            href: '',
-                            title: <HomeOutlined/>,
-                        },
-                        {
-                            href: '',
-                            title: (
-                                <>
-                                    <UserOutlined/>
-                                    <span>Application List</span>
-                                </>
-                            ),
-                        },
-                        {
-                            title: 'Application',
-                        },
-                    ]}
-                />
+                <h1 style={{justifyContent: "center", textAlign: "left", paddingLeft: "40px"}}>{union?.title}</h1>
+                <div style={{justifyContent: "center", textAlign: "left", paddingLeft: "80px"}}>
+                    <Space>
+                        <Avatar icon={<img src={"/male1.png"}/>}></Avatar>
+                        {union?.name}
+                    </Space>
+                </div>
+                <br></br>
                 <Carousel className={"union-carousel"} arrows={true}
                           dots={"slick-dots"}
-                          prevArrow={<img src={process.env.PUBLIC_URL + "prev.png"}/>}
-                          nextArrow={<img src={process.env.PUBLIC_URL + "next.png"}/>} autoplay infinite>
-                    <div>
-                        <img src={process.env.PUBLIC_URL + "union1.png"} style={imgStyle} alt={"1"}/>
+                          prevArrow={<img src={`/prev.png`} style={{zIndex: 2}}/>}
+                          nextArrow={<img src={"/next.png"} style={{zIndex: 2}}/>} autoplay infinite>
+                    <div style={{display: "flex"}}>
+                        <img src={"/union1.png"} style={imgStyle} alt={"1"}/>
 
                     </div>
-                    <div>
-                        <img src={process.env.PUBLIC_URL + "union2.png"} style={imgStyle} alt={"1"}/>
+                    <div style={{display: "flex"}}>
+                        <img src={"/union2.png"} style={imgStyle} alt={"1"}/>
 
                     </div>
-                    <div>
-                        <img src={process.env.PUBLIC_URL + "union3.png"} style={imgStyle} alt={"1"}/>
+                    <div style={{display: "flex"}}>
+                        <img src={"/union3.png"} style={imgStyle} alt={"1"}/>
 
                     </div>
-                    <div>
-                        <img src={process.env.PUBLIC_URL + "union4.png"} style={imgStyle} alt={"1"}/>
+                    <div style={{display: "flex"}}>
+                        <img src={"/union4.png"} style={imgStyle} alt={"1"}/>
                     </div>
                 </Carousel>
             </Col>
+            <Typography>
+                <h5>服务描述</h5>
+                <Paragraph>
+                    {union?.description}
+                </Paragraph>
+            </Typography>
         </Card>
     </BasicLayout>);
 };

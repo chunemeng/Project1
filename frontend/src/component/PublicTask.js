@@ -1,6 +1,5 @@
 import React from 'react';
 import Union_task from './union_task';
-import TaskProgress from "./TaskProgress"; // 引入新的UnionTask组件
 
 const PublicTask = ({ tasks, currentTaskIndex, isUnionManager,steps }) => {
     return (
@@ -15,14 +14,6 @@ const PublicTask = ({ tasks, currentTaskIndex, isUnionManager,steps }) => {
                 />
             ))}
 
-            <h2>任务进度</h2>
-            <TaskProgress
-                current={currentTaskIndex}
-                steps={tasks.map((task, index) => ({
-                    title: task.name,
-                    description: `酬金: ${task.reward}`,
-                }))}
-            />
         </div>
     );
 };

@@ -64,6 +64,8 @@ export default function HomePage() {
         label: '游戏开发', key: 6
     }]
     const navigate = useNavigate();
+    console.log(process.env.PUBLIC_URL);
+
     return (<BasicLayout>
         <Card className={"card-container"}>
             <Row>
