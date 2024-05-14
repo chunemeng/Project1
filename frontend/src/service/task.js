@@ -1,7 +1,7 @@
 import {getJson, PREFIX} from "./common";
 
 export async function searchTasks(keyword, pageIndex, pageSize) {
-    const url = `${PREFIX}/tasks?keyword=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    const url = `${PREFIX}/tasks/get?keyword=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}`;
     let tasks;
     try {
         tasks = await getJson(url);

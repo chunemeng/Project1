@@ -12,7 +12,7 @@ public interface UserService {
 
     Result login(LoginDto loginDTO, HttpServletResponse httpServletResponse);
 
-    UserDto getMe(HttpServletRequest httpServletRequest);
+    UserDto getMe(HttpServletRequest httpServletResponse);
 
     Result register(LoginDto loginDTO);
 

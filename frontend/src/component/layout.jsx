@@ -25,6 +25,8 @@ export function PrivateLayout({children}) {
 
     const checkLogin = async () => {
         let me = await getMe();
+        console.log(me);
+
         if (!me) {
             navigate("/login");
         } else {
