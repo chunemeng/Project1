@@ -12,6 +12,7 @@ import UnionInfoPage from "../page/union_info";
 import MemberListPage from "./MemberList";
 import React from "react";
 import Community from "../page/community";
+import NewhomePage from "./static_component";
 
 
 export default function Router() {
@@ -50,7 +51,7 @@ export default function Router() {
         }, {
             path: 'memberList',
             element: <MemberListPage/>
-        },{
+        }, {
             path: 'community',
             element: <Community/>
         }]
