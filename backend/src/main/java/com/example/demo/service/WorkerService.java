@@ -7,5 +7,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public interface WorkerService {
 
-    public PageResult getWorkes(QueryDto queryDto);
+    public PageResult getWorkers(QueryDto queryDto);
 }
