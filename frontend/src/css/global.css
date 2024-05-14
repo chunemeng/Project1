@@ -1,22 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .card-container {
     margin: 20px auto;
     background: white;
     height: auto;
-    width: auto;
+    width: 1500px;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
 .item-card {
-    margin:20px 40px;
-    height:480px;
+    margin: 20px 40px;
+    height: 480px;
     width: 370px;
 }
 
 .content {
-    width: 150vh;
+    width: auto;
     height: auto;
+    justify-content: center;
     margin: 20px auto;
 }
 
@@ -24,12 +29,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    vertical-align: center;
     text-align: center;
 }
 
 .background-img {
-    width:40%;
-    height:40%;
+    width: 40%;
+    height: 40%;
     margin: -80px 0 20px 20px;
 }
 
@@ -43,18 +49,21 @@
 }
 
 .slick-dots li button {
-    width: 10px !important ;
+    width: 10px !important;
     height: 10px !important;
     background: #595959 !important;
     border-radius: 100% !important;
 }
+
 .slick-dots li {
-    width: 23px !important ;
+    width: 23px !important;
 }
+
 .slick-dots li.slick-active {
-    width: 23px !important ;
+    width: 23px !important;
 }
-.ant-carousel .slick-dots-bottom{
+
+.ant-carousel .slick-dots-bottom {
     /*bottom: -12% !important;*/
 }
 
@@ -77,6 +86,6 @@
 }
 
 ul {
-    width:100%;
-    min-width:50px;
+    width: 100%;
+    min-width: 50px;
 }

@@ -1,4 +1,4 @@
-import {Outlet, useNavigate} from 'react-router-dom'
+import {Outlet, useNavigate, useSearchParams} from 'react-router-dom'
 import React, {useEffect, useState} from 'react';
 import {
     Tabs,
@@ -15,40 +15,55 @@ import {
     Divider,
     Descriptions,
     Pagination,
-    Select, Radio
+    Select,
+    Radio
 } from 'antd'
 import {projectGetApi, userListApi} from "../utils/api.js";
 import {formatDate} from "../utils/time";
-import {BasicLayout} from "../component/layout";
+import {BasicLayout, PrivateLayout} from "../component/layout";
 import '../css/global.css'
 import WorkerList from "../component/workerlIst";
 import TaskList from "../component/tasklist";
 import TabPane from "antd/es/tabs/TabPane";
+import {booster, start, statistic, TESTIMONIAL} from "../component/static_component";
+import {searchTasks} from "../service/task";
 
 
 export default function HomePage() {
-    const [project, setProject] = useState({
-        records: []
-    })
-    const [a, seta] = useState({
-        type: 0, timeLimit: 0, tujian: 0, shengjiang: 0, sous: 0, status: 0
-    })
-    useEffect(() => {
-        f(1, 0)
-    }, [])
-    useEffect(() => {
-        f(1, 0)
-    }, [a])
     const [state, setState] = useState("推荐")
-    const user = JSON.parse(sessionStorage.getItem("user"))
+    const [tasks, setTasks] = useState([]);
 
-    function f(page, pageSize) {
-        // 在 useEffect 中进行异步操作
-        // 在 useEffect 中进行异步操作
-        // projectGetApi(a.type, a.timeLimit, a.tujian, a.shengjiang, a.sous, a.status, page).then(resp => {
-        //     setProject(resp.data.data)
-        // })
+    const [totalPage, setTotalPage] = useState(0);
+
+    const [searchParams, setSearchParams] = useSearchParams();
+    const keyword = searchParams.get("keyword") || "";
+    const pageIndex = searchParams.get("pageIndex") != null ? Number.parseInt(searchParams.get("pageIndex")) : 0;
+    const pageSize = searchParams.get("pageSize") != null ? Number.parseInt(searchParams.get("pageSize")) : 10;
+
+    const getBooks = async () => {
+        let pagedTasks = await searchTasks(keyword, pageIndex, pageSize);
+        let tasks = pagedTasks.items;
+        let totalPage = pagedTasks.total;
+        setTasks(tasks);
+        setTotalPage(totalPage);
+    };
+
+    useEffect(() => {
+        getBooks();
+    }, [keyword, pageIndex, pageSize])
+
+    const handleSearch = (keyword) => {
+        setSearchParams({
+            "keyword": keyword,
+            "pageIndex": 0,
+            "pageSize": 10
+        });
+    };
+
+    const handlePageChange = (page) => {
+        setSearchParams({ ...searchParams, pageIndex: page - 1 });
     }
+
 
     const items = [{
         label: '无', key: 1
@@ -64,13 +79,26 @@ export default function HomePage() {
         label: '游戏开发', key: 6
     }]
     const navigate = useNavigate();
-    console.log(process.env.PUBLIC_URL);
 
-    return (<BasicLayout>
+    return (<PrivateLayout>
+        {start}
         <Card className={"card-container"}>
+
+            <div style={{marginLeft: "80px", marginRight: "80px"}}>
+                {booster}
+            </div>
+            <div style={{marginLeft: "80px", marginRight: "80px"}}>
+                {statistic}
+            </div>
+            <div style={{marginLeft: "80px", marginRight: "80px"}}>
+                {TESTIMONIAL}
+            </div>
+            <br></br>
+            <br/>
             <Row>
                 <img src={process.env.PUBLIC_URL + "background1.png"} alt={""} className={"background-img"}/>
-                <Card style={{height: "200px", width: "600px", margin: "100px auto",marginLeft:"200px"}} bordered={false}>
+                <Card style={{height: "200px", width: "600px", margin: "100px auto", marginLeft: "200px"}}
+                      bordered={false}>
                     <Space direction={"vertical"} size="large">
                         <Space size={"large"}>
                             <Select options={items} showSearch
@@ -78,9 +106,7 @@ export default function HomePage() {
                                         width: 200,
                                     }}
                                     filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                                    filterSort={(optionA, optionB) =>
-                                        (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                                    }
+                                    filterSort={(optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())}
                                     placeholder="任务类型"
                                     optionFilterProp="children">
                             </Select>
@@ -90,9 +116,7 @@ export default function HomePage() {
                                         width: 200,
                                     }}
                                     filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                                    filterSort={(optionA, optionB) =>
-                                        (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                                    }
+                                    filterSort={(optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())}
                                     placeholder="时间限制"
                                     optionFilterProp="children">
                             </Select>
@@ -102,26 +126,19 @@ export default function HomePage() {
                                     width: 200,
                                 }}
                                 filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                                filterSort={(optionA, optionB) =>
-                                    (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())
-                                }
+                                filterSort={(optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())}
                                 placeholder="排序方式"
                                 optionFilterProp="children">
                         </Select>
                         <Input.Search onPressEnter={e => {
-                            if (e.target.value !== '' && e.target.value !== undefined) {
-                                seta(prevState => ({...prevState, sous: e.target.value}))
-                            } else {
-                                seta(prevState => ({...prevState, sous: 0}))
-                            }
                         }} size={"middle"} placeholder="搜索"/>
                     </Space>
                 </Card>
             </Row>
             <div style={{marginTop: '-120px'}}>
                 <Divider/>
-                <TaskList tasks={[1, 2, 3, 4, 5, 6]}></TaskList>
+                <TaskList tasks={tasks}></TaskList>
             </div>
         </Card>
-    </BasicLayout>)
+    </PrivateLayout>)
 }
