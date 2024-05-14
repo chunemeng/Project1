@@ -8,6 +8,7 @@ import com.example.demo.entity.User;
 import com.example.demo.result.Result;
 import com.example.demo.service.UserService;
 import com.example.demo.utils.JWTUtils;
+import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
+    @Resource
     private RedisTemplate<String, Object> redisTemplate;
 
     private static final String slat = "THIS-IS-THIS-IS-THIS-IS-THIS";
@@ -45,6 +46,18 @@ public class UserServiceImpl implements UserService {
 
         redisTemplate.delete("Authentication" + id);
         return Result.success("登出成功", null);
+    }
+
+
+    private static Map<String, String> getHeaders(HttpServletRequest request) {
+        Map<String, String> headerMap = new HashMap<>();
+        Enumeration<String> enumeration = request.getHeaderNames();
+        while (enumeration.hasMoreElements()) {
+            String name	= enumeration.nextElement();
+            String value = request.getHeader(name);
+            headerMap.put(name, value);
+        }
+        return headerMap;
     }
 
     @Override
@@ -71,8 +84,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getMe(HttpServletRequest httpServletRequest) {
-        String token = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
+    public UserDto getMe(HttpServletRequest httpServletResponse) {
+        Map<String,String> map = getHeaders(httpServletResponse);
+        String token = httpServletResponse.getHeader(JWT_TOKEN_HEADER);
         DecodedJWT verify = JWTUtils.verify(token);
         Long id = Long.valueOf(verify.getId());
         Optional<User> user = userRepository.findById(id);

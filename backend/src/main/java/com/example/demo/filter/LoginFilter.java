@@ -6,9 +6,3 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
-@Slf4j
-@Component
-public class LoginFilter extends UsernamePasswordAuthenticationFilter {
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
-}
