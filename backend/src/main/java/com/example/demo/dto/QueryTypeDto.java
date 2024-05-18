@@ -3,10 +3,9 @@ package com.example.demo.dto;
 import lombok.Data;
 
 @Data
-public class QueryDto {
+public class QueryTypeDto {
     String keyword;
     Integer pageIndex;
     Integer pageSize;
-    Short category;
     Boolean status;
 }

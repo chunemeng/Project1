@@ -3,9 +3,13 @@ package com.example.demo.service;
 import com.example.demo.dto.IdDto;
 import com.example.demo.dto.QueryDto;
 import com.example.demo.dto.TaskDto;
+import com.example.demo.dto.TaskInfoDto;
 import com.example.demo.result.PageResult;
 import com.example.demo.result.Result;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.data.domain.Page;
+
+import java.net.http.HttpRequest;
 
 public interface TaskService {
 
@@ -13,12 +17,14 @@ public interface TaskService {
 
     public Result updateTask(TaskDto taskDto);
 
-    public Result addTask(TaskDto taskDto);
+    public Result addTask(TaskDto taskDto, HttpServletRequest httpServletRequest);
     public PageResult getTasks(QueryDto queryDto);
 
-    public PageResult getTasksByWorkerId(IdDto idDto);
+    public Result orderTask(Long id, HttpServletRequest httpServletRequest);
 
-    PageResult getTasksByUnionId(IdDto idDto);
+    public TaskInfoDto getTasksById(Long id);
 
-    PageResult getTasksByRecruiterId(IdDto idDto);
+    public PageResult getTasksByWorkerId(QueryDto queryDto, HttpServletRequest httpServletReques);
+
+    PageResult getTasksByUserId(QueryDto queryDto, HttpServletRequest httpServletRequest);
 }

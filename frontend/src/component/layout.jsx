@@ -4,6 +4,8 @@ import About from "../page/about";
 import React, {useEffect, useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {getMe} from "../service/user";
+import cookie from 'react-cookies'
+
 
 const {Header, Content, Footer, Sider} = Layout;
 
@@ -24,14 +26,19 @@ export function PrivateLayout({children}) {
     const navigate = useNavigate();
 
     const checkLogin = async () => {
-        let me = await getMe();
+        let me = cookie.load("user-sutaats");
         console.log(me);
-
         if (!me) {
-            navigate("/login");
-        } else {
-            setUser(me);
+            me = await getMe();
+            if (!me) {
+                navigate("/login");
+            } else {
+                cookie.save("user-sutaats", me);
+                console.log(me);
+                setUser(me);
+            }
         }
+        setUser(me);
     }
 
     useEffect(() => {
@@ -54,12 +61,17 @@ export function SiderLayout({children, menus}) {
     const navigate = useNavigate();
 
     const checkLogin = async () => {
-        let me = await getMe();
+        let me = cookie.load("user-sutaats");
         if (!me) {
-            navigate("/login");
-        } else {
-            setUser(me);
+            me = await getMe();
+            if (!me) {
+                navigate("/login");
+            } else {
+                cookie.save("user-sutaats", me);
+                setUser(me);
+            }
         }
+        setUser(me);
     }
 
     useEffect(() => {

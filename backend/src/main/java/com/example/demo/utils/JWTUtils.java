@@ -24,9 +24,7 @@ public class JWTUtils {
         JWTCreator.Builder builder = JWT.create();
 
         map.forEach(builder::withClaim);
-        return builder.withExpiresAt(instance.getTime())
-                .sign(Algorithm.HMAC256(SIGNATURE));
-
+        return builder.sign(Algorithm.HMAC256(SIGNATURE));
     }
 
     public static Long getExpireTime() {

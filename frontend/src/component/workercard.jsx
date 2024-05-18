@@ -1,21 +1,24 @@
 import {useNavigate} from "react-router-dom";
-import {Avatar, Card, Descriptions, Flex, Space, Typography} from "antd";
+import {Avatar, Card, Col, Descriptions, Flex, Space, Typography} from "antd";
 import React from "react";
 
 export default function WorkerCard({worker}) {
-    const navigate = useNavigate();
-    const src = worker.id <= 3 ? `male${worker.id}.png` : `female${worker.id - 3}.png`;
-    return <Card size={"small"} className={"item-card"}>
+    return <Card size={"small"} className={"item-card"} style={{width:"370px"}}>
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
             <Space direction={"vertical"}>
                 <Flex justify={"center"}>
-                    <Space>
-                        <Avatar size={100}
-                                src={process.env.PUBLIC_URL + src}
-                                style={{margin: "20px 0"}}
-                        />
-                        {'众包者' + worker.id}
-                    </Space>
+                    <Col>
+                        <Space>
+                            <Avatar size={100}
+                                    src={worker?.cover}
+                                    style={{margin: "20px 0", marginLeft: "40px"}}
+                            />
+                            {worker?.name}
+                        </Space>
+                        <br></br>
+                        <p style={{width:"300px", textAlign:"center"}}>{worker?.description}</p>
+                        <br/>
+                    </Col>
                 </Flex>
                 <Descriptions size={"default"} column={1} bordered items={[
                     {
@@ -39,12 +42,7 @@ export default function WorkerCard({worker}) {
                     {
                         key: '5',
                         label: '联系方式',
-                        children: '无',
-                        span: 2
-                    }, {
-                        key: '6',
-                        label: '所在地区',
-                        children: '湖南省长沙市',
+                        children: '',
                         span: 2
                     },
                 ]}/>

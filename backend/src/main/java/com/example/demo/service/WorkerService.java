@@ -6,6 +6,5 @@ import com.example.demo.result.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public interface WorkerService {
-
     public PageResult getWorkers(QueryDto queryDto);
 }

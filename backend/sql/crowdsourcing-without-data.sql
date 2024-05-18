@@ -38,17 +38,19 @@ CREATE TABLE `task`
 (
     `id`          int UNSIGNED NOT NULL AUTO_INCREMENT,
     `title`       varchar(50)  NOT NULL COMMENT '标题',
-    `description` varchar(255) COMMENT '描述文档链接',
+    `description` varchar(255) COMMENT '描述文档',
     `user_id`     int UNSIGNED NOT NULL,
     `worker_id`   int UNSIGNED,
     `create_date` DATETIME     NOT NULL,
     `update_date` DATETIME     NOT NULL,
-    `duration`    TIMESTAMP     NOT NULL,
+    `duration`    TIMESTAMP    NOT NULL,
     `category`    TINYINT      NOT NULL COMMENT '任务种类',
     `status`      bit(1)       NOT NULL DEFAULT 0 COMMENT '设置是否在任务界面展示',
+    `money`       int unsigned NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT '任务表';
+
 
 
 DROP TABLE IF EXISTS `order_table`;
@@ -66,3 +68,7 @@ CREATE TABLE `order_table`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8 COMMENT '订单表';
 
+USE crowd_sourcing;
+UPDATE task
+set task.description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+where task.description not like 'kdsljfakaj'

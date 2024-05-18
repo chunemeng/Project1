@@ -49,7 +49,7 @@ public class UserController {
         return userService.changePassword(loginDto, httpServletResponse);
     }
 
-    @PostMapping("/logout")
+    @PutMapping("/logout")
     Result logout(HttpServletRequest httpServletRequest) {
         return userService.logout(httpServletRequest);
     }

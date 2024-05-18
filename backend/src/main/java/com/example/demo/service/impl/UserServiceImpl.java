@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result logout(HttpServletRequest httpServletRequest) {
-        String token = httpServletRequest.getHeader(JWT_TOKEN_HEADER);
+        String token = httpServletRequest.getHeader("authorization");
         if (token == null) {
             return Result.error("未提供JWT令牌");
         }
@@ -42,9 +42,11 @@ public class UserServiceImpl implements UserService {
         if (verify == null) {
             return Result.error("JWT令牌验证失败");
         }
-        Long id = Long.valueOf(verify.getId());
+        String id = (verify.getClaim("id").asString());
+        if (id != null) {
+            redisTemplate.delete("Authentication" + id);
+        }
 
-        redisTemplate.delete("Authentication" + id);
         return Result.success("登出成功", null);
     }
 
@@ -53,7 +55,7 @@ public class UserServiceImpl implements UserService {
         Map<String, String> headerMap = new HashMap<>();
         Enumeration<String> enumeration = request.getHeaderNames();
         while (enumeration.hasMoreElements()) {
-            String name	= enumeration.nextElement();
+            String name = enumeration.nextElement();
             String value = request.getHeader(name);
             headerMap.put(name, value);
         }
@@ -85,11 +87,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getMe(HttpServletRequest httpServletResponse) {
-        Map<String,String> map = getHeaders(httpServletResponse);
-        String token = httpServletResponse.getHeader(JWT_TOKEN_HEADER);
+        Map<String, String> map = getHeaders(httpServletResponse);
+        String token = httpServletResponse.getHeader("Authorization");
+        if (token == null) {
+            return null;
+        }
         DecodedJWT verify = JWTUtils.verify(token);
-        Long id = Long.valueOf(verify.getId());
-        Optional<User> user = userRepository.findById(id);
+        Optional<User> user;
+        String id = null;
+        if (verify != null) {
+            id = (verify.getClaim("id")).asString();
+        }
+        user = userRepository.findById(Long.valueOf(id));
         return user.map(UserDto::new).orElse(null);
     }
 

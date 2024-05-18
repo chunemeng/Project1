@@ -7,10 +7,8 @@ export default function WorkerList({workers}) {
             grid={{
                 gutter: 16, column: 3
             }}
-            dataSource={workers.map(w => ({
+            dataSource={workers?.map(w => ({
                 ...w,
-                name: w,
-                id: w
             }))}
             renderItem={(worker) => (
                 <List.Item>
@@ -19,6 +17,5 @@ export default function WorkerList({workers}) {
             )}
             style={{margin: "0  40px"}}
         />
-        <Pagination style={{margin:"20px 0"}}></Pagination>
     </Space>
 }

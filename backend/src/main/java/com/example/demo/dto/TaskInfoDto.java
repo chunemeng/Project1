@@ -1,27 +1,19 @@
 package com.example.demo.dto;
 
-import com.example.demo.entity.Task;
 import lombok.Data;
-import lombok.Value;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
-/**
- * DTO for {@link com.example.demo.entity.Task}
- */
 @Data
-public class TaskDto implements Serializable {
+public class TaskInfoDto {
     Long id;
     String title;
-    Long userId;
-    Long workerId;
+    String userName;
+    String userCover;
     Long money;
     Short category;
-    Boolean status;
     String description;
     Timestamp createDate;
     Timestamp updateDate;
     private Timestamp duration;
-
 }

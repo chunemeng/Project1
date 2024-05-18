@@ -32,7 +32,6 @@ const Community = () => {
 
     }
     const handleSearch = (e) => {
-        console.log("搜索值：",tag);
         setTag(" ");
     }
 

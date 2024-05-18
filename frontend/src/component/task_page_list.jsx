@@ -1,13 +1,15 @@
-import {List, Pagination, Space} from "antd";
-import WorkerCard from "./workercard";
+import {List, Space} from "antd";
 import TaskCard from "./taskcard";
 import React from "react";
+import ListTaskCard from "./list_task_card";
 
-export default function TaskList({tasks}) {
+
+export default function TaskPage({tasks}) {
+    console.log(tasks);
     return <Space direction="vertical" align="center" style={{width: "100%"}}>
         <List
             grid={{
-                column: 3
+                column: 1
             }}
             dataSource={tasks?.map(w => ({
                 ...w,
@@ -16,17 +18,10 @@ export default function TaskList({tasks}) {
             }))}
             renderItem={(task) => (
                 <List.Item style={{marginLeft: "-25px"}}>
-                    <TaskCard task={task}/>
+                    <ListTaskCard task={task}/>
                 </List.Item>
             )}
-            style={{
-                margin: "0  40px",
-                minWidth: "1500px",
-                marginLeft: "auto",
-                marginRight: "auto",
-                backgroundColor: "#f5f5f5"
-            }}
+            style={{margin: "0  40px", marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: 'center'}}
         />
-
     </Space>
 }

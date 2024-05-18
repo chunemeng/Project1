@@ -85,11 +85,9 @@ const MyTaskPage = () => {
     }
 
     return (
-        <SiderLayout menus={taskMenu()}>
             <Card className={"card-container"}>
             {renderContent()}
             </Card>
-        </SiderLayout>
     );
 
 };

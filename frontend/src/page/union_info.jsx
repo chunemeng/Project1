@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {useState} from "react"
 import {Card, Col, Row, Space, Button, Typography, Breadcrumb, Image, Avatar, Divider} from 'antd'
 import {ExclamationCircleOutlined, HomeOutlined, UserOutlined} from '@ant-design/icons';
-import {BasicLayout} from "../component/layout";
+import {BasicLayout, PrivateLayout} from "../component/layout";
 import {Carousel} from 'antd';
 import {useParams, useSearchParams} from "react-router-dom";
 import {getWorkerById} from "../service/worker";
@@ -29,7 +29,7 @@ export default function UnionInfoPage() {
         getUnion();
     }, [id]);
 
-    return (<BasicLayout>
+    return (<PrivateLayout>
         <Card style={{height: "auto", width: "1400px"}}>
             <Breadcrumb
                 items={[{
@@ -86,7 +86,7 @@ export default function UnionInfoPage() {
                 {team}
             </Typography>
         </Card>
-    </BasicLayout>);
+    </PrivateLayout>);
 };
 
 const pricing = () => {

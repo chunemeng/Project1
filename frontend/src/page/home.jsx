@@ -30,7 +30,6 @@ import {searchTasks} from "../service/task";
 
 
 export default function HomePage() {
-    const [state, setState] = useState("推荐")
     const [tasks, setTasks] = useState([]);
 
     const [totalPage, setTotalPage] = useState(0);
@@ -38,10 +37,11 @@ export default function HomePage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const keyword = searchParams.get("keyword") || "";
     const pageIndex = searchParams.get("pageIndex") != null ? Number.parseInt(searchParams.get("pageIndex")) : 0;
-    const pageSize = searchParams.get("pageSize") != null ? Number.parseInt(searchParams.get("pageSize")) : 10;
+    const pageSize = searchParams.get("pageSize") != null ? Number.parseInt(searchParams.get("pageSize")) : 6;
+    const category = searchParams.get("category") != null ? searchParams.get("category") : "";
 
-    const getBooks = async () => {
-        let pagedTasks = await searchTasks(keyword, pageIndex, pageSize);
+    const getTasks = async () => {
+        let pagedTasks = await searchTasks(keyword, pageIndex, pageSize, category, false);
         let tasks = pagedTasks.items;
         let totalPage = pagedTasks.total;
         setTasks(tasks);
@@ -49,34 +49,37 @@ export default function HomePage() {
     };
 
     useEffect(() => {
-        getBooks();
-    }, [keyword, pageIndex, pageSize])
+        getTasks();
+    }, [keyword, pageIndex, pageSize, category])
 
     const handleSearch = (keyword) => {
         setSearchParams({
-            "keyword": keyword,
-            "pageIndex": 0,
-            "pageSize": 10
+            "keyword": keyword, "pageIndex": 0, "pageSize": 6, category: category
+        });
+    };
+
+    const handleSelect = (category) => {
+        if (category === undefined)
+            category = "";
+
+        setSearchParams({
+            "keyword": keyword, "pageIndex": 0, "pageSize": 6, category: category
         });
     };
 
     const handlePageChange = (page) => {
-        setSearchParams({ ...searchParams, pageIndex: page - 1 });
+        setSearchParams({keyword: keyword, pageIndex: page - 1, pageSize: pageSize, category: category});
     }
-
-
+    console.log(totalPage * pageSize);
     const items = [{
-        label: '无', key: 1
+        value: 1,
+        label: '数据标注', key: 1
     }, {
-        label: 'APP开发', key: 2
+        value: 2,
+        label: '程序外包', key: 2
     }, {
-        label: '小程序开发', key: 3
-    }, {
-        label: '网站建设', key: 4
-    }, {
-        label: '软件开发', key: 5
-    }, {
-        label: '游戏开发', key: 6
+        value: 3,
+        label: '图形创意', key: 3
     }]
     const navigate = useNavigate();
 
@@ -105,8 +108,8 @@ export default function HomePage() {
                                     style={{
                                         width: 200,
                                     }}
-                                    filterOption={(input, option) => (option?.label ?? '').includes(input)}
-                                    filterSort={(optionA, optionB) => (optionA?.label ?? '').toLowerCase().localeCompare((optionB?.label ?? '').toLowerCase())}
+                                    allowClear={true}
+                                    onChange={handleSelect}
                                     placeholder="任务类型"
                                     optionFilterProp="children">
                             </Select>
@@ -130,15 +133,30 @@ export default function HomePage() {
                                 placeholder="排序方式"
                                 optionFilterProp="children">
                         </Select>
-                        <Input.Search onPressEnter={e => {
-                        }} size={"middle"} placeholder="搜索"/>
+                        <Input.Search onSearch={handleSearch} size={"middle"} placeholder="搜索"/>
                     </Space>
                 </Card>
             </Row>
-            <div style={{marginTop: '-120px'}}>
-                <Divider/>
-                <TaskList tasks={tasks}></TaskList>
-            </div>
         </Card>
+
+        <div style={{marginTop: '-120px'}}>
+            <div style={{
+                zIndex: 20, display: "flex", height: "auto", width: "1500px", background: "#f5f5f5", marginLeft: "19px"
+            }}>
+                <Space direction="vertical" align="center" size={"middle"} style={{width: "100%", display: "flex"}}>
+                    <TaskList tasks={tasks}></TaskList>
+                    <br></br>
+                    <Pagination defaultCurrent={1}
+                                current={pageIndex + 1}
+                                total={totalPage * pageSize * 10 / 6}
+                                onChange={handlePageChange}
+                                style={{
+                                    display: "flex", justifyContent: "center", alignItems: "center",
+                                }}
+                                showSizeChanger={false}/>
+
+                </Space>
+            </div>
+        </div>
     </PrivateLayout>)
 }

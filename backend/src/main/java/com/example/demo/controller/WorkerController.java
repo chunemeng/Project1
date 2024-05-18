@@ -16,5 +16,5 @@ public class WorkerController {
     WorkerService workerService;
 
     @GetMapping("/get")
-    PageResult getWorkers(@RequestBody QueryDto queryDto){return workerService.getWorkers(queryDto);}
+    PageResult getWorkers(QueryDto queryDto){return workerService.getWorkers(queryDto);}
 }

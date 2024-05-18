@@ -71,6 +71,7 @@ const Login = () => {
                             <a
                                 style={{
                                     float: 'right',
+                                    paddingLeft:"140px"
                                 }}
                                 href="#/"
                             >

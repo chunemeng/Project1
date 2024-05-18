@@ -11,6 +11,17 @@ export async function getMe() {
     return me;
 }
 
+export async function getUserById(id) {
+    const url = `${PREFIX}/user/${id}`;
+    let me = null;
+    try {
+        me = await getJson(url);
+    } catch (e) {
+        console.log(e);
+    }
+    return me;
+}
+
 export async function changePassword(request) {
     const url = `${PREFIX}/user/me/password`;
     let res;

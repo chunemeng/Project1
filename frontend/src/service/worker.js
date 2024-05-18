@@ -36,3 +36,18 @@ export async function searchUnions(keyword, pageIndex, pageSize) {
     }
     return unions;
 }
+
+export async function searchWorkers(keyword, pageIndex, pageSize, status) {
+    const url = `${PREFIX}/worker/get?keyword=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}&status=${status}`;
+    let workers;
+    try {
+        workers = await getJson(url);
+    } catch (e) {
+        console.log(e);
+        workers = {
+            total: 0,
+            items: []
+        };
+    }
+    return workers;
+}

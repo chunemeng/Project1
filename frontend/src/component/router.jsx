@@ -3,16 +3,14 @@ import Profile from '../page/profile.jsx'
 import Published from "../page/published.jsx";
 import Login from "../page/login.jsx";
 import WorkerPage from "../page/worker.jsx";
-import View from "../page/view.jsx";
 import HomePage from "../page/home.jsx";
-import TaskPage from "../page/task.jsx";
 import MyTaskPage from "../page/mytask";
 import Publish from "../page/publish";
 import UnionInfoPage from "../page/union_info";
 import MemberListPage from "./MemberList";
 import React from "react";
 import Community from "../page/community";
-import NewhomePage from "./static_component";
+import TaskView from "../page/task_view.jsx";
 
 
 export default function Router() {
@@ -28,18 +26,15 @@ export default function Router() {
             path: 'login',
             element: <Login/>,
         }, {
-            path: 'view',
-            element: <View/>,
+            path: 'task/:id',
+            element: <TaskView/>,
         }, {
             path: 'published',
             element: <Published/>
         }, {
             path: 'account',
             element: <Login/>
-        }, {
-            path: 'task',
-            element: <TaskPage/>
-        }, {
+        },{
             path: 'profile',
             element: <Profile/>
         }, {

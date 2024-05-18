@@ -24,13 +24,8 @@ public class Worker{
 
     private Boolean status;
 
-    private Long unionId;
-
     @Column(name = "user_id", columnDefinition = "int UNSIGNED not null")
     private Long userId;
-
-    @Column(name = "nickname", nullable = false, length = 50)
-    private String nickname;
 
     @Column(name = "cover", nullable = false)
     private String cover;

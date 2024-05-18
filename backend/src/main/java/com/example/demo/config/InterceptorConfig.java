@@ -14,14 +14,11 @@ import java.util.List;
 
 @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
-    @Resource
-    private RedisTemplate<String, Object> redisTemplate;
-
+    @Autowired
+    private JWTInterceptor jwtInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        JWTInterceptor jwtInterceptor = new JWTInterceptor();
-        // todo 添加对众包任务首页和任务详情页以及众包者信息页请求的排除
-        List<String> excludePath = Arrays.asList("/api/user/login", "/api/user/register");
-        registry.addInterceptor(jwtInterceptor).addPathPatterns("/").excludePathPatterns(excludePath);
+        List<String> excludePath = Arrays.asList("/api/user/login", "/user/login", "/api/user/register", "/user/logout");
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath);
     }
 }
