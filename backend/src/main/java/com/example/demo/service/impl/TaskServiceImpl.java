@@ -24,12 +24,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Pageable;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
+
 
 @Service
 public class TaskServiceImpl implements TaskService {
@@ -178,7 +175,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public PageResult getTasksByUserId(QueryDto queryDto, HttpServletRequest httpServletRequest) {
+    public PageResult getTasksByUserId_impl(QueryDto queryDto, HttpServletRequest httpServletRequest) {
         Page<Task> page;
         if (queryDto.getPageIndex() == null || queryDto.getPageSize() == null) {
             throw new RuntimeException("错误的查询参数");

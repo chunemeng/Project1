@@ -34,5 +34,4 @@ public class Order {
 
     @Column(name = "end_time", nullable = false)
     private Timestamp endTime;
-
 }

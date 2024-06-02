@@ -18,6 +18,7 @@ public class Task {
     private Long userId;
 
     private Long workerId;
+
     private Long money;
 
     private Short category;

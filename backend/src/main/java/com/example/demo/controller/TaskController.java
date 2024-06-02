@@ -19,19 +19,8 @@ public class TaskController {
     @Autowired
     TaskService taskService;
 
-    @PutMapping("/update")
-    Result updateTask(@RequestBody TaskDto taskDto) {
-        if (taskDto == null) {
-            return Result.error("网络错误");
-        }
-        return taskService.updateTask(taskDto);
-    }
-
     @PostMapping("/add")
     Result addTask(@RequestBody TaskDto taskDto, HttpServletRequest httpServletRequest) {
-        if (taskDto == null) {
-            return Result.error("网络错误");
-        }
         return taskService.addTask(taskDto, httpServletRequest);
     }
 
@@ -47,13 +36,9 @@ public class TaskController {
 
     @GetMapping("/mine")
     PageResult getTasksByUserId(QueryDto queryDto, HttpServletRequest httpServletRequest) {
-        return taskService.getTasksByUserId(queryDto, httpServletRequest);
+        return taskService.getTasksByUserId_impl(queryDto, httpServletRequest);
     }
 
-    @PostMapping("/order")
-    Result orderTask(@RequestBody Long id, HttpServletRequest httpServletRequest) {
-        return taskService.orderTask(id, httpServletRequest);
-    }
 
     @GetMapping("/worker")
     PageResult getTasksByWorkerId(QueryDto queryDto, HttpServletRequest httpServletRequest) {
