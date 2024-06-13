@@ -42,24 +42,13 @@ public class UserServiceImpl implements UserService {
         if (verify == null) {
             return Result.error("JWT令牌验证失败");
         }
+
         String id = (verify.getClaim("id").asString());
         if (id != null) {
             redisTemplate.delete("Authentication" + id);
         }
 
         return Result.success("登出成功", null);
-    }
-
-
-    private static Map<String, String> getHeaders(HttpServletRequest request) {
-        Map<String, String> headerMap = new HashMap<>();
-        Enumeration<String> enumeration = request.getHeaderNames();
-        while (enumeration.hasMoreElements()) {
-            String name = enumeration.nextElement();
-            String value = request.getHeader(name);
-            headerMap.put(name, value);
-        }
-        return headerMap;
     }
 
     @Override
@@ -87,16 +76,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getMe(HttpServletRequest httpServletResponse) {
-        Map<String, String> map = getHeaders(httpServletResponse);
         String token = httpServletResponse.getHeader("Authorization");
         if (token == null) {
             return null;
         }
+
         DecodedJWT verify = JWTUtils.verify(token);
         Optional<User> user;
         String id = null;
+
         if (verify != null) {
             id = (verify.getClaim("id")).asString();
+        } else {
+            return null;
         }
         user = userRepository.findById(Long.valueOf(id));
         return user.map(UserDto::new).orElse(null);

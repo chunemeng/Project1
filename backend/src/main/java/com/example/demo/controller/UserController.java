@@ -22,9 +22,6 @@ public class UserController {
 
     @PostMapping("/login")
     Result login(@RequestBody LoginDto loginDTO, HttpServletResponse httpServletResponse) {
-        if (loginDTO == null) {
-            return Result.error("网络错误");
-        }
         return userService.login(loginDTO, httpServletResponse);
     }
 
@@ -35,17 +32,11 @@ public class UserController {
 
     @PostMapping("/register")
     Result register(@RequestBody LoginDto loginDto) {
-        if (loginDto == null) {
-            return Result.error("网络错误");
-        }
         return userService.register(loginDto);
     }
 
     @PutMapping("/password")
     Result changePassword(@RequestBody LoginDto loginDto, HttpServletResponse httpServletResponse) {
-        if (loginDto == null) {
-            return Result.error("网络错误");
-        }
         return userService.changePassword(loginDto, httpServletResponse);
     }
 
