@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Task</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.example.demo.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Task (com.example.demo.entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Task</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Task$HibernateInstantiator$Fe8yLpWh</td>
+  </tr>
+  <tr>
+    <td class="name">Task$HibernateInstantiator$GgxXeNu6</td>
+  </tr>
+  <tr>
+    <td class="name">Task$HibernateInstantiator$pjIZJJgv</td>
+  </tr>
+  <tr>
+    <td class="name">Task$HibernateProxy$HPhpAwGl</td>
+  </tr>
+  <tr>
+    <td class="name">Task$HibernateProxy$m3D3QSG9</td>
+  </tr>
+  <tr>
+    <td class="name">Task$HibernateProxy$N7dC4pIl</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.example.demo.entity;
+&nbsp;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import lombok.Data;
+&nbsp;
+&nbsp;import java.sql.Timestamp;
+&nbsp;import java.time.Instant;
+&nbsp;
+<b class="fc">&nbsp;@Data</b>
+&nbsp;@Entity
+&nbsp;public class Task {
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+<b class="fc">&nbsp;    private Long id;</b>
+&nbsp;
+<b class="fc">&nbsp;    private String title;</b>
+&nbsp;
+<b class="fc">&nbsp;    private Long userId;</b>
+&nbsp;
+<b class="fc">&nbsp;    private Long workerId;</b>
+&nbsp;
+<b class="fc">&nbsp;    private Long money;</b>
+&nbsp;
+<b class="fc">&nbsp;    private Short category;</b>
+&nbsp;
+<b class="fc">&nbsp;    private Boolean status;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;description&quot;)
+<b class="fc">&nbsp;    private String description;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;create_date&quot;, nullable = false)
+<b class="fc">&nbsp;    private Timestamp createDate;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;update_date&quot;, nullable = false)
+<b class="fc">&nbsp;    private Timestamp updateDate;</b>
+&nbsp;
+&nbsp;    @Column(name = &quot;duration&quot;, nullable = false)
+<b class="fc">&nbsp;    private Timestamp duration;</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-06-15 16:48</div>
+</div>
+</body>
+</html>

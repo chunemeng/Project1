@@ -36,5 +36,6 @@ public class DtoTest {
         QueryTypeDto queryTypeDto = new QueryTypeDto();
         objectMapper.writeValueAsString(queryTypeDto);
         userDto = new UserDto();
+        objectMapper.writeValueAsString(userDto);
     }
 }
