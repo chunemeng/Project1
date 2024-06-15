@@ -1,7 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.demo.dao.UserRepository;
+import com.example.demo.repo.UserRepository;
 import com.example.demo.dto.LoginDto;
 import com.example.demo.dto.UserDto;
 import com.example.demo.entity.User;

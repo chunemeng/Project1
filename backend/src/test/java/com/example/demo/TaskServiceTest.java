@@ -2,8 +2,8 @@ package com.example.demo;
 
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.demo.dao.TaskRepository;
-import com.example.demo.dao.UserRepository;
+import com.example.demo.repo.TaskRepository;
+import com.example.demo.repo.UserRepository;
 import com.example.demo.dto.QueryDto;
 import com.example.demo.dto.TaskDto;
 import com.example.demo.entity.Task;

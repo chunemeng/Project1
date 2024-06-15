@@ -1,9 +1,8 @@
 package com.example.demo.service.impl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.example.demo.dao.TaskRepository;
-import com.example.demo.dao.UserRepository;
-import com.example.demo.dto.IdDto;
+import com.example.demo.repo.TaskRepository;
+import com.example.demo.repo.UserRepository;
 import com.example.demo.dto.QueryDto;
 import com.example.demo.dto.TaskDto;
 import com.example.demo.dto.TaskInfoDto;
@@ -15,7 +14,6 @@ import com.example.demo.service.TaskService;
 import com.example.demo.utils.BeanCopyUtil;
 import com.example.demo.utils.JWTUtils;
 import jakarta.servlet.http.HttpServletRequest;
-import org.hibernate.jdbc.Expectation;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
