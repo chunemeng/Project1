@@ -31,7 +31,6 @@ public class WorkerServiceImpl implements WorkerService {
         if(queryDto.getStatus() == null) {
             throw new RuntimeException("网络错误，众包者状态不能为空");
         }
-
         if(queryDto.getKeyword().isEmpty()) {
             page = workerRepository.findAllByStatus(queryDto.getStatus(),PageRequest.of(queryDto.getPageIndex(), queryDto.getPageSize()));
         } else {

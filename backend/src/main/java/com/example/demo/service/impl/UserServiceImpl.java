@@ -105,7 +105,6 @@ public class UserServiceImpl implements UserService {
         if (user.isPresent()) {
             return Result.error("用户名已被占用");
         }
-
         User newUser = new User();
         newUser.setUsername(username);
         newUser.setPassword(password);
