@@ -25,20 +25,21 @@ public class JWTInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        Map<String, Object> map = new HashMap<>();
-        String token = request.getHeader(JWT_TOKEN_HEADER);
-        try {
-            DecodedJWT verify = JWTUtils.verify(token);
-            Long id = Long.valueOf(verify.getClaim("id").asString());
-
-            return token.equals(redisTemplate.boundValueOps("Authentication" + id).get());
-        } catch (Exception e) {
-            map.put("msg", "token无效！");
-        }
-        map.put("state", false);
-        String json = new ObjectMapper().writeValueAsString(map);
-        response.setContentType("application/json;charset=UTF-8");
-        response.getWriter().println(json);
-        return false;
+        return true;
+//        Map<String, Object> map = new HashMap<>();
+//        String token = request.getHeader(JWT_TOKEN_HEADER);
+//        try {
+//            DecodedJWT verify = JWTUtils.verify(token);
+//            Long id = Long.valueOf(verify.getClaim("id").asString());
+//
+//            return token.equals(redisTemplate.boundValueOps("Authentication" + id).get());
+//        } catch (Exception e) {
+//            map.put("msg", "token无效！");
+//        }
+//        map.put("state", false);
+//        String json = new ObjectMapper().writeValueAsString(map);
+//        response.setContentType("application/json;charset=UTF-8");
+//        response.getWriter().println(json);
+//        return false;
     }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Button } from 'antd';
-import Task from './task';
 import Progress from './Progress';
 
 const UnionTask = ({ task, isUnionManager,steps }) => {
