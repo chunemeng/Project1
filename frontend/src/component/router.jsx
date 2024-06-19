@@ -29,7 +29,7 @@ export default function Router() {
             path: 'task/:id',
             element: <TaskView/>,
         }, {
-            path: 'published',
+            path: 'published/:id',
             element: <Published/>
         }, {
             path: 'account',

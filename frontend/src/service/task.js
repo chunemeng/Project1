@@ -1,4 +1,4 @@
-import {DUMMY_RESPONSE, getJson, PREFIX, post} from "./common";
+import {DUMMY_RESPONSE, getJson, PREFIX, post, put} from "./common";
 
 export async function searchTasks(keyword, pageIndex, pageSize, category, status) {
     const url = `${PREFIX}/task/get?keyword=${keyword}&pageIndex=${pageIndex}&pageSize=${pageSize}&category=${category}&status=${status}`;
@@ -68,6 +68,19 @@ export async function addTask(task) {
     let res;
     try {
         res = await post(url, task);
+    } catch (e) {
+        console.log(e);
+        res = DUMMY_RESPONSE;
+    }
+    console.log(res);
+    return res;
+}
+
+export async function setWorker(id, workerId){
+    const url = `${PREFIX}/task/${id}?worker=${workerId}`;
+    let res;
+    try{
+        res = await put(url);
     } catch (e) {
         console.log(e);
         res = DUMMY_RESPONSE;

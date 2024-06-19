@@ -27,4 +27,6 @@ public interface TaskService {
     public PageResult getTasksByWorkerId(QueryDto queryDto, HttpServletRequest httpServletReques);
 
     PageResult getTasksByUserId_impl(QueryDto queryDto, HttpServletRequest httpServletRequest);
+
+    public Result setWorkers(Long id, Long workerId);
 }

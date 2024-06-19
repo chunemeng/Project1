@@ -105,7 +105,7 @@ export default function Publish() {
             发布的任务
         </Space>),
         children: <Space direction="vertical" align="center" size={"middle"} style={{width: "100%", display: "flex"}}>
-            <TaskPage tasks={tasks}></TaskPage>
+            <TaskPage tasks={tasks} status={2}></TaskPage>
             <br></br>
             <Pagination defaultCurrent={1}
                         current={pageIndex + 1}
@@ -129,7 +129,7 @@ export default function Publish() {
             </Space>),
             children: <Space direction="vertical" align="center" size={"middle"}
                              style={{width: "100%", display: "flex"}}>
-                <TaskPage tasks={tasks}></TaskPage>
+                <TaskPage tasks={tasks} status={1}></TaskPage>
                 <br></br>
                 <Pagination defaultCurrent={1}
                             current={pageIndex + 1}

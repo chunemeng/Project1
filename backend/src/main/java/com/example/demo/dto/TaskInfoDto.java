@@ -1,6 +1,7 @@
 package com.example.demo.dto;
 
 import lombok.Data;
+import org.hibernate.resource.beans.internal.BeansMessageLogger_$logger;
 
 import java.sql.Timestamp;
 
@@ -16,4 +17,5 @@ public class TaskInfoDto {
     Timestamp createDate;
     Timestamp updateDate;
     private Timestamp duration;
+    Boolean status;
 }

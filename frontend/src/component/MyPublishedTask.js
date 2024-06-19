@@ -1,5 +1,5 @@
 import React from 'react';
-import Publishedtask from './PublishedTask';
+import Publishedtask from './publishedtask';
 
 const MyPublishedTask = ({ publishedTasks }) => {
     return (
