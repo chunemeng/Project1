@@ -4,7 +4,7 @@ import React from "react";
 import ListTaskCard from "./list_task_card";
 
 
-export default function TaskPage({tasks}) {
+export default function TaskPage({tasks,status}) {
     console.log(tasks);
     return <Space direction="vertical" align="center" style={{width: "100%"}}>
         <List
@@ -18,7 +18,7 @@ export default function TaskPage({tasks}) {
             }))}
             renderItem={(task) => (
                 <List.Item style={{marginLeft: "-25px"}}>
-                    <ListTaskCard task={task}/>
+                    <ListTaskCard task={task} status={status}/>
                 </List.Item>
             )}
             style={{margin: "0  40px", marginLeft: "auto", marginRight: "auto", display: "flex", alignItems: 'center'}}

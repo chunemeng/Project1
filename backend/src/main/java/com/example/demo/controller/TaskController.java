@@ -44,4 +44,9 @@ public class TaskController {
     PageResult getTasksByWorkerId(QueryDto queryDto, HttpServletRequest httpServletRequest) {
         return taskService.getTasksByWorkerId(queryDto, httpServletRequest);
     }
+
+    @PutMapping("/{id}")
+    Result setWorker(@PathVariable("id") Long id, @RequestParam("worker") Long workerId){
+        return taskService.setWorkers(id,workerId);
+    }
 }

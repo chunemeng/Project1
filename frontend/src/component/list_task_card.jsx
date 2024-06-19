@@ -3,12 +3,13 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 
 
-export default function ListTaskCard({task}) {
+export default function ListTaskCard({task,status}) {
     const navigate = useNavigate();
     const category_item = ["数据标注", "程序外包", "图形创意"];
     return <Card className="relative flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
                  onClick={() => {
-                     navigate("/task/" + task?.id);
+                     if(status === 1 ) {navigate("/task/" + task?.id);}
+                     else {navigate("/published/" + task?.id);}
                  }}
                  style={{height: "120px", width: "800px", marginLeft: "270px", marginTop: "20px"}}
                  hoverable={true}

@@ -1,6 +1,7 @@
 package com.example.demo.service.impl;
 
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.demo.entity.Worker;
 import com.example.demo.repo.TaskRepository;
 import com.example.demo.repo.UserRepository;
 import com.example.demo.dto.QueryDto;
@@ -8,6 +9,7 @@ import com.example.demo.dto.TaskDto;
 import com.example.demo.dto.TaskInfoDto;
 import com.example.demo.entity.Task;
 import com.example.demo.entity.User;
+import com.example.demo.repo.WorkerRepository;
 import com.example.demo.result.PageResult;
 import com.example.demo.result.Result;
 import com.example.demo.service.TaskService;
@@ -144,25 +146,40 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public Result setWorkers(Long id ,Long workerId){
+        if(id == null || workerId == null) {
+            throw new RuntimeException("任务不能为空");
+        }
+        Task task = taskRepository.findById(id).orElse(null);
+        if(task == null){
+            throw new RuntimeException("当前任务不存在");
+        }
+        task.setStatus(true);
+        task.setWorkerId(workerId);
+        taskRepository.save(task);
+        return Result.success("添加成功", null);
+    }
+
+    @Override
     public PageResult getTasksByWorkerId(QueryDto queryDto, HttpServletRequest httpServletRequest) {
         Page<Task> page;
         if (queryDto.getPageIndex() == null || queryDto.getPageSize() == null) {
             throw new RuntimeException("错误的查询参数");
         }
-        String token = httpServletRequest.getHeader("authorization");
-        if (token == null) {
-            throw new RuntimeException("请先登录");
-        }
-        DecodedJWT verify = JWTUtils.verify(token);
-        String userId = null;
-        if (verify != null) {
-            userId = (verify.getClaim("id")).asString();
-        }
-        if (userId == null || userId.isEmpty()) {
-            throw new RuntimeException("请先登录");
-        }
-        Long id = Long.valueOf(userId);
-
+//        String token = httpServletRequest.getHeader("authorization");
+//        if (token == null) {
+//            throw new RuntimeException("请先登录");
+//        }
+//        DecodedJWT verify = JWTUtils.verify(token);
+//        String userId = null;
+//        if (verify != null) {
+//            userId = (verify.getClaim("id")).asString();
+//        }
+//        if (userId == null || userId.isEmpty()) {
+//            throw new RuntimeException("请先登录");
+//        }
+//        Long id = Long.valueOf(userId);
+        Long id = 0L;
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             throw new RuntimeException("当前用户不存在");
@@ -178,19 +195,20 @@ public class TaskServiceImpl implements TaskService {
         if (queryDto.getPageIndex() == null || queryDto.getPageSize() == null) {
             throw new RuntimeException("错误的查询参数");
         }
-        String token = httpServletRequest.getHeader("authorization");
-        if (token == null) {
-            throw new RuntimeException("请先登录");
-        }
-        DecodedJWT verify = JWTUtils.verify(token);
-        String userId = null;
-        if (verify != null) {
-            userId = (verify.getClaim("id")).asString();
-        }
-        if (userId == null || userId.isEmpty()) {
-            throw new RuntimeException("请先登录");
-        }
-        Long id = Long.valueOf(userId);
+////        String token = httpServletRequest.getHeader("authorization");
+////        if (token == null) {
+////            throw new RuntimeException("请先登录");
+////        }
+////        DecodedJWT verify = JWTUtils.verify(token);
+////        String userId = null;
+////        if (verify != null) {
+////            userId = (verify.getClaim("id")).asString();
+////        }
+////        if (userId == null || userId.isEmpty()) {
+////            throw new RuntimeException("请先登录");
+////        }
+//        Long id = Long.valueOf(userId);
+        Long id = 0L;
         User user = userRepository.findById(id).orElse(null);
         if (user == null) {
             throw new RuntimeException("当前用户不存在");

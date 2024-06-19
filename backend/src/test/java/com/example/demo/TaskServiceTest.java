@@ -229,4 +229,19 @@ public class TaskServiceTest {
         service.getTasksByUserId_impl(queryDto,request);
     }
 
+    @Test
+    void testSetWorkers() {
+        Long id = 1L;
+        assertThrows(RuntimeException.class, () -> service.setWorkers(id,null));
+
+        Long workerId = 1L;
+        Optional<Task> task = Optional.empty();
+        doReturn(task).when(taskRepository).findById(any());
+        assertThrows(RuntimeException.class, ()->service.setWorkers(id,workerId));
+
+        task = Optional.of(new Task());
+        doReturn(task).when(taskRepository).findById(any());
+        service.setWorkers(id,workerId);
+    }
+
 }
