@@ -8,7 +8,7 @@ import {useParams, useSearchParams} from "react-router-dom";
 import {getWorkerById} from "../service/worker";
 import Title from "antd/lib/typography/Title";
 import Paragraph from "antd/lib/typography/Paragraph";
-import {team} from "../component/static_component";
+import {Team, team} from "../component/static_component";
 
 const imgStyle = {
     width: "100%", height: "100%", objectFit: "cover",
@@ -22,10 +22,12 @@ export default function UnionInfoPage() {
     let {id} = useParams();
     const getUnion = async () => {
         let union = await getWorkerById(id);
+        console.log(union);
         setUnion(union);
     }
 
     useEffect(() => {
+        console.log(union);
         getUnion();
     }, [id]);
 
@@ -50,7 +52,7 @@ export default function UnionInfoPage() {
                     style={{justifyContent: "center", textAlign: "center", paddingLeft: "40px"}}>{union?.title}</Title>
                 <div style={{justifyContent: "center", textAlign: "left", paddingLeft: "80px"}}>
                     <Space size="large">
-                        <Avatar icon={<img src={"/male1.png"}/>}></Avatar>
+                        <Avatar icon={<img src={union?.cover}/>}></Avatar>
                         {union?.name}
                     </Space>
                 </div>
@@ -83,7 +85,7 @@ export default function UnionInfoPage() {
                     <h5>服务描述</h5>
                     {union?.description}
                 </Paragraph>
-                {team}
+                {<Team members={(union?.users)}/>}
             </Typography>
         </Card>
     </PrivateLayout>);

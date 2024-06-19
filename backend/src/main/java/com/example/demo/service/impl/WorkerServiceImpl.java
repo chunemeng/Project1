@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.dto.UnionDto;
 import com.example.demo.repo.WorkerRepository;
 import com.example.demo.dto.QueryDto;
 import com.example.demo.dto.WorkerDto;
@@ -15,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class WorkerServiceImpl implements WorkerService {
@@ -41,6 +43,15 @@ public class WorkerServiceImpl implements WorkerService {
         }
         List<WorkerDto> workerDtoList = BeanCopyUtil.copyListProperties(page.getContent(),WorkerDto::new);
         return new PageResult(page.getTotalPages(), workerDtoList);
+    }
 
+    @Override
+    public UnionDto getUnion(Long id) {
+        Optional<Worker> worker = workerRepository.findByIdAndStatus(id, true);
+        if(worker.isPresent()) {
+            return new UnionDto(worker.get());
+        } else {
+            throw new RuntimeException("错误的公会");
+        }
     }
 }

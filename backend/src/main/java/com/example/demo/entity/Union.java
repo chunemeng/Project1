@@ -16,9 +16,9 @@ public class Union {
 
     private Long adminId;
 
-    @Column(name = "create_date", nullable = false)
+//    @Column(name = "create_date", nullable = false)
     private Timestamp createDate;
 
-    @Column(name = "update_date", nullable = false)
+//    @Column(name = "update_date", nullable = false)
     private Timestamp updateDate;
 }

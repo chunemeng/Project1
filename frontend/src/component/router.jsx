@@ -4,13 +4,11 @@ import Published from "../page/published.jsx";
 import Login from "../page/login.jsx";
 import WorkerPage from "../page/worker.jsx";
 import HomePage from "../page/home.jsx";
-import MyTaskPage from "../page/mytask";
 import Publish from "../page/publish";
 import UnionInfoPage from "../page/union_info";
-import MemberListPage from "./MemberList";
 import React from "react";
-import Community from "../page/community";
 import TaskView from "../page/task_view.jsx";
+import TaskPage from "../page/task";
 
 
 export default function Router() {
@@ -32,23 +30,17 @@ export default function Router() {
             path: 'published',
             element: <Published/>
         }, {
+            path: 'task',
+            element: <TaskPage/>
+        }, {
             path: 'account',
             element: <Login/>
-        },{
+        }, {
             path: 'profile',
             element: <Profile/>
         }, {
-            path: 'mytask',
-            element: <MyTaskPage/>
-        }, {
             path: 'union/:id',
             element: <UnionInfoPage/>
-        }, {
-            path: 'memberList',
-            element: <MemberListPage/>
-        }, {
-            path: 'community',
-            element: <Community/>
         }]
     return <BrowserRouter>
         <Routes><Route path={'/'}

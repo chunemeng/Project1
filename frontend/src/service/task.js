@@ -52,7 +52,6 @@ export async function getTaskByWorkerId(keyword, pageIndex, pageSize, status) {
 
 export async function getTaskById(id) {
     const url = `${PREFIX}/task/${id}`;
-    console.log(url);
     let task;
     try {
         task = await getJson(url);

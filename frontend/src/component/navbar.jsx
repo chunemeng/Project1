@@ -11,12 +11,14 @@ import {handleBaseApiResponse} from "../utils/requestUtils";
 export default function NavBar({user}) {
     const [current, setCurrent] = useState('');
     const navigate = useNavigate();
-    const navItems = [{label: "首页", value: "/"}, {label: "众包", value: "/worker"}, {
+    const navItems = [{label: "首页", value: "/"}, {label: "任务", value: "/task"}, {label: "众包", value: "/worker"}, {
         label: "公会", value: "/union/1"
     }, {label: "需求", value: "/publish"}];
+
     const navMenuItems = navItems.map(item => ({
         key: item.value, label: <Link to={item.value}>{item.label}</Link>
     }));
+
     const [messageApi, contextHolder] = useMessage();
 
 
@@ -70,7 +72,6 @@ export default function NavBar({user}) {
             </Space>
         </div>
     }, [user]);
-
 
     return (navbar);
 }

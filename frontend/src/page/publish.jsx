@@ -21,10 +21,9 @@ import {Link, useNavigate, useSearchParams} from "react-router-dom";
 import {BasicLayout, PrivateLayout, SiderLayout} from "../component/layout";
 import {BarChartOutlined, CommentOutlined, ShoppingCartOutlined, UploadOutlined, UserOutlined} from "@ant-design/icons";
 import TabPane from "antd/es/tabs/TabPane";
-import Mytask from "./mytask";
 
 import DemandTab from "../component/demand_tab";
-import {getTaskByUserId, getTaskByWorkerId, searchTasks} from "../service/task";
+import {getTaskByUserId, getTaskByWorkerId} from "../service/task";
 import TaskPage from "../component/task_page_list";
 
 const {Title} = Typography;

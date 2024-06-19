@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const request = axios.create({
+export const request = axios.create({
     baseURL: '/api'
 });
 

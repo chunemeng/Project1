@@ -27,7 +27,6 @@ export function PrivateLayout({children}) {
 
     const checkLogin = async () => {
         let me = cookie.load("user-sutaats");
-        console.log(me);
         if (!me) {
             me = await getMe();
             if (!me) {

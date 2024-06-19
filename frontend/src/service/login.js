@@ -6,7 +6,6 @@ export async function login(username, password) {
     let result;
     try {
         result = await post_set(url, {username, password});
-        console.log(result);
     } catch (e) {
         console.log(e);
         result = {

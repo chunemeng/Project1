@@ -13,8 +13,6 @@ import java.net.http.HttpRequest;
 
 public interface TaskService {
 
-
-
     public Result updateTask(TaskDto taskDto);
 
     public Result addTask(TaskDto taskDto, HttpServletRequest httpServletRequest);

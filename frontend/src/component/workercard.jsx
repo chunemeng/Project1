@@ -3,7 +3,11 @@ import {Avatar, Card, Col, Descriptions, Flex, Space, Typography} from "antd";
 import React from "react";
 
 export default function WorkerCard({worker}) {
-    return <Card size={"small"} className={"item-card"} style={{width:"370px"}}>
+    const navigate = useNavigate();
+    return <Card size={"small"} className={"item-card"} style={{width:"370px", height:"auto"}} onClick={() => {
+        if (worker.status === true)
+        navigate("/union/" + worker?.id);
+    } }>
         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
             <Space direction={"vertical"}>
                 <Flex justify={"center"}>
@@ -20,7 +24,7 @@ export default function WorkerCard({worker}) {
                         <br/>
                     </Col>
                 </Flex>
-                <Descriptions size={"default"} column={1} bordered items={[
+                {!worker.status && <Descriptions size={"default"} column={1} bordered items={[
                     {
                         key: '1',
                         label: '专长',
@@ -45,7 +49,7 @@ export default function WorkerCard({worker}) {
                         children: '',
                         span: 2
                     },
-                ]}/>
+                ]}/>}
 
             </Space>
         </div>

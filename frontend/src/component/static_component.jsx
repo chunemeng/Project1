@@ -394,58 +394,85 @@ export const TESTIMONIAL = <section class="text-gray-600 body-font">
 </section>
 
 
-export const team = <section className="py-6 dark:bg-gray-100 dark:text-gray-800">
-    <div className="container flex flex-col items-center justify-center p-4 mx-auto space-y-8 sm:p-10">
-        <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl">我们的团队</h1>
-        <p className="max-w-2xl text-center dark:text-gray-600">At a assumenda quas cum earum ut itaque commodi saepe
-            rem aspernatur quam natus quis nihil quod, hic explicabo doloribus magnam neque, exercitationem eius
-            sunt!</p>
-        <div className="flex flex-row flex-wrap-reverse justify-center">
-            <div className="flex flex-col justify-center m-8 text-center">
-                <img alt=""
-                     className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
-                     src="https://source.unsplash.com/100x100/?portrait?0"/>
-                <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
-                <p className="dark:text-gray-600">Visual Designer</p>
-            </div>
-            <div className="flex flex-col justify-center m-8 text-center">
-                <img alt=""
-                     className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
-                     src="https://source.unsplash.com/100x100/?portrait?1"/>
-                <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
-                <p className="dark:text-gray-600">Visual Designer</p>
-            </div>
-            <div className="flex flex-col justify-center m-8 text-center">
-                <img alt=""
-                     className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
-                     src="https://source.unsplash.com/100x100/?portrait?2"/>
-                <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
-                <p className="dark:text-gray-600">Visual Designer</p>
-            </div>
-            <div className="flex flex-col justify-center m-8 text-center">
-                <img alt=""
-                     className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
-                     src="https://source.unsplash.com/100x100/?portrait?3"/>
-                <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
-                <p className="dark:text-gray-600">Visual Designer</p>
-            </div>
-            <div className="flex flex-col justify-center m-8 text-center">
-                <img alt=""
-                     className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
-                     src="https://source.unsplash.com/100x100/?portrait?4"/>
-                <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
-                <p className="dark:text-gray-600">Visual Designer</p>
-            </div>
-            <div className="flex flex-col justify-center m-8 text-center">
-                <img alt=""
-                     className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
-                     src="https://source.unsplash.com/100x100/?portrait?5"/>
-                <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
-                <p className="dark:text-gray-600">Visual Designer</p>
+export function Team({members}) {
+    console.log(members)
+    return <section className="py-6 dark:bg-gray-100 dark:text-gray-800">
+        <div className="container flex flex-col items-center justify-center p-4 mx-auto space-y-8 sm:p-10">
+            <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl">我们的团队</h1>
+            <p className="max-w-2xl text-center dark:text-gray-600">
+                At a assumenda quas cum earum ut itaque commodi saepe rem aspernatur quam natus quis nihil quod, hic
+                explicabo doloribus magnam neque, exercitationem eius sunt!
+            </p>
+            <div className="flex flex-row flex-wrap-reverse justify-center">
+                {members?.map((member, index) => (
+                    <div key={index} className="flex flex-col justify-center m-8 text-center">
+                        <img
+                            alt={member?.nickname}
+                            className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+                            src={member?.cover}
+                        />
+                        <p className="text-xl font-semibold leading-tight">{member?.nickname}</p>
+                        {/*<p className="dark:text-gray-600">{member.role}</p>*/}
+                    </div>
+                ))}
             </div>
         </div>
-    </div>
-</section>
+    </section>;
+
+    // return <section className="py-6 dark:bg-gray-100 dark:text-gray-800">
+    //     <div className="container flex flex-col items-center justify-center p-4 mx-auto space-y-8 sm:p-10">
+    //         <h1 className="text-4xl font-bold leading-none text-center sm:text-5xl">我们的团队</h1>
+    //         <p className="max-w-2xl text-center dark:text-gray-600">At a assumenda quas cum earum ut itaque commodi
+    //             saepe
+    //             rem aspernatur quam natus quis nihil quod, hic explicabo doloribus magnam neque, exercitationem eius
+    //             sunt!</p>
+    //         <div className="flex flex-row flex-wrap-reverse justify-center">
+    //             <div className="flex flex-col justify-center m-8 text-center">
+    //                 <img alt=""
+    //                      className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+    //                      src="/male1.png"/>
+    //                 <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
+    //                 <p className="dark:text-gray-600">Visual Designer</p>
+    //             </div>
+    //             <div className="flex flex-col justify-center m-8 text-center">
+    //                 <img alt=""
+    //                      className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+    //                      src="https://source.unsplash.com/100x100/?portrait?1"/>
+    //                 <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
+    //                 <p className="dark:text-gray-600">Visual Designer</p>
+    //             </div>
+    //             <div className="flex flex-col justify-center m-8 text-center">
+    //                 <img alt=""
+    //                      className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+    //                      src="https://source.unsplash.com/100x100/?portrait?2"/>
+    //                 <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
+    //                 <p className="dark:text-gray-600">Visual Designer</p>
+    //             </div>
+    //             <div className="flex flex-col justify-center m-8 text-center">
+    //                 <img alt=""
+    //                      className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+    //                      src="https://source.unsplash.com/100x100/?portrait?3"/>
+    //                 <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
+    //                 <p className="dark:text-gray-600">Visual Designer</p>
+    //             </div>
+    //             <div className="flex flex-col justify-center m-8 text-center">
+    //                 <img alt=""
+    //                      className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+    //                      src="https://source.unsplash.com/100x100/?portrait?4"/>
+    //                 <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
+    //                 <p className="dark:text-gray-600">Visual Designer</p>
+    //             </div>
+    //             <div className="flex flex-col justify-center m-8 text-center">
+    //                 <img alt=""
+    //                      className="self-center flex-shrink-0 w-24 h-24 mb-4 bg-center bg-cover rounded-full dark:bg-gray-500"
+    //                      src="https://source.unsplash.com/100x100/?portrait?5"/>
+    //                 <p className="text-xl font-semibold leading-tight">Leroy Jenkins</p>
+    //                 <p className="dark:text-gray-600">Visual Designer</p>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </section>
+}
 
 
 export const start = <section className="dark:bg-gray-100 dark:text-gray-800">

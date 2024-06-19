@@ -18,7 +18,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
     private JWTInterceptor jwtInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//        List<String> excludePath = Arrays.asList("/api/user/login", "/user/login", "/api/user/register", "/user/logout");
-//        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath);
+        List<String> excludePath = Arrays.asList("/api/user/login", "/user/login", "/api/user/register", "/user/logout");
+        registry.addInterceptor(jwtInterceptor).addPathPatterns("/**").excludePathPatterns(excludePath);
     }
 }

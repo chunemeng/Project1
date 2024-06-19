@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -13,18 +14,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nickname;
+    @JsonIgnore
     private String username;
+    @JsonIgnore
     private String password;
     private String cover;
     private String email;
     private boolean status;
     @Column(name = "worker_id", columnDefinition = "int UNSIGNED")
     private Long workId;
-
-    @Column(name = "create_date", nullable = false)
-    private Timestamp createDate;
-
-    @Column(name = "update_date", nullable = false)
-    private Timestamp updateDate;
-
 }

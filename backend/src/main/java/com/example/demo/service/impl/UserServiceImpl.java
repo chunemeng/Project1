@@ -53,47 +53,45 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result login(LoginDto loginDTO, HttpServletResponse httpServletResponse) {
-        return Result.success();
-//        String username = loginDTO.getUsername();
-//        String password = loginDTO.getPassword();
-//        if (username == null || password == null) {
-//            return Result.error("网络错误");
-//        }
-//        Optional<User> user = userRepository.findByUsername(username);
-//        if (user.isPresent()) {
-//            if (user.get().getPassword().equals(password)) {
-//                Map<String, String> map = new HashMap<>();
-//                Long userId = user.get().getId();
-//                map.put("id", String.valueOf(userId));
-//                map.put("date", String.valueOf(System.currentTimeMillis()));
-//                final String token = JWTUtils.createToken(map);
-//                redisTemplate.opsForValue().set("Authentication" + userId, token, JWTUtils.getExpireTime(), TimeUnit.SECONDS);
-//                httpServletResponse.setHeader(JWT_TOKEN_HEADER, token);
-//                return Result.success("登陆成功", null);
-//            }
-//        }
-//        return Result.error("用户不存在");
+        String username = loginDTO.getUsername();
+        String password = loginDTO.getPassword();
+        if (username == null || password == null) {
+            return Result.error("网络错误");
+        }
+        Optional<User> user = userRepository.findByUsername(username);
+        if (user.isPresent()) {
+            if (user.get().getPassword().equals(password)) {
+                Map<String, String> map = new HashMap<>();
+                Long userId = user.get().getId();
+                map.put("id", String.valueOf(userId));
+                map.put("date", String.valueOf(System.currentTimeMillis()));
+                final String token = JWTUtils.createToken(map);
+                redisTemplate.opsForValue().set("Authentication" + userId, token, JWTUtils.getExpireTime(), TimeUnit.SECONDS);
+                httpServletResponse.setHeader(JWT_TOKEN_HEADER, token);
+                return Result.success("登陆成功", null);
+            }
+        }
+        return Result.error("用户不存在");
     }
 
     @Override
     public UserDto getMe(HttpServletRequest httpServletResponse) {
         String token = httpServletResponse.getHeader("Authorization");
-//        if (token == null) {
-//            return null;
-//        }
-//
-//        DecodedJWT verify = JWTUtils.verify(token);
-//        Optional<User> user;
-//        String id = null;
-//
-//        if (verify != null) {
-//            id = (verify.getClaim("id")).asString();
-//        } else {
-//            return null;
-//        }
-//        user = userRepository.findById(Long.valueOf(id));
-        return new UserDto(userRepository.findById(1l).get());
-//        return user.map(UserDto::new).orElse(null);
+        if (token == null) {
+            return null;
+        }
+
+        DecodedJWT verify = JWTUtils.verify(token);
+        Optional<User> user;
+        String id = null;
+
+        if (verify != null) {
+            id = (verify.getClaim("id")).asString();
+        } else {
+            return null;
+        }
+        user = userRepository.findById(Long.valueOf(id));
+        return user.map(UserDto::new).orElse(null);
     }
 
     @Override

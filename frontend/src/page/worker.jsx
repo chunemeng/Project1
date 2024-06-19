@@ -20,7 +20,6 @@ export default function WorkerPage() {
     const pageSize = searchParams.get("pageSize") != null ? Number.parseInt(searchParams.get("pageSize")) : 6;
 
     const getWorkers = async () => {
-        console.log(status);
         let pagedWorkers = await searchWorkers(keyword, pageIndex, pageSize, status);
         let workers = pagedWorkers.items;
         let totalPage = pagedWorkers.total;
@@ -30,7 +29,12 @@ export default function WorkerPage() {
 
     useEffect(() => {
         getWorkers();
-    }, [keyword, pageIndex, pageSize, status])
+    }, [keyword, pageIndex, pageSize])
+
+    useEffect(() => {
+        getWorkers();
+    }, [status])
+
 
     const handleSearch = (keyword) => {
         setSearchParams({
@@ -41,8 +45,9 @@ export default function WorkerPage() {
     const handlePageChange = (page) => {
         setSearchParams({...searchParams, pageIndex: page - 1});
     }
+
     const onChange = (key) => {
-        console.log(Boolean(key))
+        setSearchParams({...searchParams, pageIndex: 0});
         setStatus(Boolean(key));
     }
 
