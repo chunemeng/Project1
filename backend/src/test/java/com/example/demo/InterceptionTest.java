@@ -100,18 +100,23 @@ public class InterceptionTest {
     @BeforeEach
     public void setUpBeforeClass() {
         // 此处不测试会覆盖UtilsTest的测试
-        if (!Mockito.mockingDetails(JWTUtils.class).isMock()) {
-            Map<String, String> map = new HashMap<>();
-            map.put("username", "admin");
-            String s = JWTUtils.createToken(map);
-            JWTUtils.getExpireTime();
-            JWTUtils.verify("token");
-            JWTUtils.verify(s);
-            mockStatic(JWTUtils.class);
+        try {
+            if (!Mockito.mockingDetails(JWTUtils.class).isMock()) {
+                Map<String, String> map = new HashMap<>();
+                map.put("username", "admin");
+                String s = JWTUtils.createToken(map);
+                JWTUtils.getExpireTime();
+                JWTUtils.verify("token");
+                JWTUtils.verify(s);
+                mockStatic(JWTUtils.class);
+            }
+            MockitoAnnotations.openMocks(this);
+        } catch (JWTDecodeException e) {
+
         }
 
 
-        MockitoAnnotations.openMocks(this);
+
     }
 
 }

@@ -33,6 +33,9 @@ public class UnionDto {
         this.createDate = worker.getCreateDate();
         this.updateDate = worker.getUpdateDate();
         users = new ArrayList<>();
+        if (worker.getUsers() == null) {
+            return;
+        }
         users = BeanCopyUtil.copyListProperties(worker.getUsers(),UserDto::new);
     }
 }

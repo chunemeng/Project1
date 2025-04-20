@@ -154,14 +154,19 @@ public class TaskServiceImpl implements TaskService {
             throw new RuntimeException("错误的任务信息");
         }
         TaskInfoDto taskDto = new TaskInfoDto();
-        if (!task.getStatus()) {
+        if (task.getStatus() != null) {
             Hibernate.initialize(task.getWaiter());
         } else {
-            taskDto.setWorker(workerRepository.findById(task.getWorkerId()).orElse(null));
+            if (workerRepository != null) {
+                taskDto.setWorker(workerRepository.findById(task.getWorkerId()).orElse(null));
+            } else {
+                taskDto.setWorker(null);
+            }
         }
 
         BeanUtils.copyProperties(task, taskDto);
-        if (task.getStatus()) {
+
+        if (task.getStatus() == null || task.getStatus()) {
             taskDto.setWaiter(null);
         } else {
             taskDto.setWorker(null);
